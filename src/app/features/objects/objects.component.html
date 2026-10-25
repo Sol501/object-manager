@@ -1,1 +1,38 @@
-<p>objects works!</p>
+<div class="app-page">
+  <header class="app-header">
+    <div
+      class="app-container header-content d-flex flex-wrap align-items-center justify-content-between"
+    >
+      <img class="brand-logo" src="assets/images/logo.png" alt="Metrix Plus" />
+      <button
+        class="btn app-button button-regular btn-light"
+        type="button"
+        (click)="logout()"
+      >
+        Logout
+      </button>
+    </div>
+  </header>
+
+  <main class="app-container objects-page">
+    <section
+      class="card objects-home d-flex flex-column flex-sm-row align-items-sm-center justify-content-sm-between"
+    >
+      <h1 class="objects-title" id="objects-title">Objects</h1>
+      <nav class="objects-actions d-flex flex-column flex-sm-row flex-wrap">
+        <a
+          class="btn app-button button-regular btn-primary"
+          routerLink="/objects/add"
+        >
+          Add Object
+        </a>
+        <a
+          class="btn app-button button-regular btn-outline-primary"
+          routerLink="/objects/types"
+        >
+          Add Object Type
+        </a>
+      </nav>
+    </section>
+  </main>
+</div>

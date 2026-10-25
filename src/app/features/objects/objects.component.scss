@@ -1,0 +1,33 @@
+.objects-page {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.objects-home {
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-card);
+}
+.objects-title {
+  margin: 0;
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+.objects-actions {
+  gap: 0.75rem;
+}
+@media (min-width: 36rem) {
+  .objects-home {
+    padding: 2rem;
+  }
+}
+.app-header {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+.header-content {
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
