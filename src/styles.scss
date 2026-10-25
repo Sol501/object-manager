@@ -1,0 +1,77 @@
+body {
+  font-family: var(--font-sans);
+  color: var(--color-foreground);
+  background-color: var(--color-canvas);
+}
+
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 0.1875rem solid var(--color-primary);
+  outline-offset: 0.1875rem;
+}
+
+.app-page {
+  min-height: 100dvh;
+}
+.app-container {
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.brand-logo {
+  display: block;
+  width: 11.25rem;
+  max-width: 100%;
+  height: auto;
+}
+.loading-message {
+  padding: 1rem;
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+.save-status {
+  font-size: 0.875rem;
+}
+.text-muted {
+  color: var(--color-muted) !important;
+}
+.alert {
+  font-size: 0.875rem;
+}
+.alert p {
+  margin: 0;
+}
+.alert-danger {
+  color: var(--color-danger);
+  background: var(--color-danger-subtle);
+  border-color: var(--color-danger-border);
+}
+.alert-success {
+  color: var(--color-success);
+  background: var(--color-success-subtle);
+  border-color: var(--color-border);
+}
+.btn:disabled {
+  opacity: 0.65;
+}
+.sr-only {
+  width: 0.0625rem;
+  height: 0.0625rem;
+  margin: -0.0625rem;
+  clip: rect(0, 0, 0, 0);
+}
+
+@media (min-width: 36rem) {
+  .app-container {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+}

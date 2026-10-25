@@ -59,6 +59,9 @@
             ],
             "styles": [
               "public/assets/vendor/bootstrap/css/bootstrap.min.css",
+              "src/styles/fonts.scss",
+              "src/styles/theme.scss",
+              "src/styles/reference.scss",
               "src/styles.scss"
             ]
           },
