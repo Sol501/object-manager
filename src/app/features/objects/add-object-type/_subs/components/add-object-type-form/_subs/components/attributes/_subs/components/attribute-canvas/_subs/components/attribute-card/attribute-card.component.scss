@@ -1,0 +1,126 @@
+:host {
+  display: block;
+  height: 100%;
+}
+.attribute-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+  border-radius: 0.375rem;
+  box-shadow: 0 0 0.25rem rgb(106 150 183 / 16%);
+}
+.card-header {
+  flex-shrink: 0;
+  position: relative;
+  min-height: 2.1rem;
+  padding: 0.4375rem 0.5rem;
+  border-radius: 0.25rem 0.25rem 0 0;
+  background: #eef1f3;
+}
+.card-title {
+  margin-top: 0.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.main-card-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+  gap: 0.5rem;
+  padding: 0 1.5625rem 0.1875rem 1rem;
+  border-radius: 0 0.25rem 0 1.875rem;
+  background: #8693a2;
+  z-index: 2;
+}
+.attribute-card:hover .main-card-actions,
+.attribute-card:focus-within .main-card-actions,
+.main-card-actions.open {
+  display: flex;
+}
+.main-card-actions button:not(.dropdown-item) {
+  width: 0.9375rem;
+  height: 1.875rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.main-card-actions img {
+  width: 100%;
+  filter: brightness(0) invert(1);
+}
+.move-card {
+  cursor: move;
+  touch-action: none;
+}
+.dropdown-menu {
+  top: 1.875rem;
+  left: auto;
+  right: 0;
+  min-width: 7.5rem;
+  padding: 0.3125rem 0;
+  box-shadow: var(--shadow-card);
+}
+.dropdown-item {
+  padding: 0.25rem 0.5625rem;
+  font-size: 0.75rem;
+}
+.dropdown-item.text-danger {
+  color: #c4514e !important;
+}
+.dropdown-item:disabled {
+  color: var(--color-muted);
+  opacity: 0.6;
+}
+.resize-card {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 0;
+  background: transparent;
+  opacity: 0;
+  cursor: se-resize;
+  touch-action: none;
+}
+.resize-card::after {
+  content: '';
+  position: absolute;
+  right: 0.125rem;
+  bottom: 0.125rem;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-right: 0.125rem solid rgb(0 0 0 / 30%);
+  border-bottom: 0.125rem solid rgb(0 0 0 / 30%);
+}
+.attribute-card:hover .resize-card,
+.attribute-card:focus-within .resize-card {
+  opacity: 1;
+}
+@media (hover: none) {
+  .main-card-actions {
+    display: flex;
+  }
+}
+@media (max-width: 56.25rem) {
+  .resize-card,
+  .main-card-actions .move-card {
+    display: none;
+  }
+}
+
+.card-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+.dragging-input {
+  opacity: 0.5;
+}
+
+.drop-target {
+  box-shadow: 0 -0.125rem var(--color-accent);
+}

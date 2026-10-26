@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  min-width: 0;
+  overflow-x: auto;
+}
+.reference-widget {
+  width: 100%;
+  min-width: 0;
+}
+.gantt-widget {
+  height: 31.25rem;
+  min-width: 45rem;
+}

@@ -1,0 +1,97 @@
+<article class="attribute-card" [style.background-color]="group.controls.backgroundColor.value">
+  <header class="card-header">
+    <h3 class="card-title">{{ group.controls.title.value }}</h3>
+    <div class="main-card-actions" [class.open]="menuOpen()">
+      <button
+        class="move-card"
+        type="button"
+        title="Move card"
+        [disabled]="group.disabled"
+        (pointerdown)="moveStarted.emit($event)"
+        (keydown)="moveKey.emit($event)"
+      >
+        <img
+          src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/arrows-alt.svg"
+          alt="Move card"
+        />
+      </button>
+      <button
+        type="button"
+        class="card-menu-trigger"
+        title="Card actions"
+        [disabled]="group.disabled"
+        (click)="menuOpen.set(!menuOpen())"
+      >
+        <img
+          src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/ellipsis-h.svg"
+          alt="Card actions"
+        />
+      </button>
+      @if (menuOpen()) {
+        <div class="dropdown-menu show">
+          <button class="dropdown-item" type="button" (click)="manage()">Manage card</button>
+          <button
+            class="dropdown-item"
+            type="button"
+            [disabled]="group.disabled"
+            (click)="openPicker()"
+            title="Add new Input"
+          >
+            Add new Input
+          </button>
+          <div class="dropdown-divider"></div>
+          <button
+            class="dropdown-item text-danger"
+            type="button"
+            [disabled]="group.disabled"
+            (click)="removed.emit()"
+          >
+            Delete card
+          </button>
+        </div>
+      }
+    </div>
+  </header>
+  <div class="card-body p-2" formArrayName="inputs">
+    @for (input of inputs.controls; track input.controls.id.value; let index = $index) {
+      <div
+        class="input-position"
+        [formGroupName]="index"
+        [class.dragging-input]="draggingInputId() === input.controls.id.value"
+        [attr.data-input-id]="input.controls.id.value"
+        [class.drop-target]="
+          inputDropTarget() === input.controls.id.value &&
+          draggingInputId() !== input.controls.id.value
+        "
+      >
+        <app-attribute-input
+          (removed)="removeInput(index)"
+          (duplicated)="duplicateInput(index)"
+          (moveStarted)="startInputDrag(index, $event)"
+          (reordered)="moveInput(index, index + $event)"
+        />
+      </div>
+    }
+  </div>
+  <button
+    class="resize-card"
+    type="button"
+    title="Resize card"
+    [disabled]="group.disabled"
+    (pointerdown)="resizeStarted.emit($event)"
+    (keydown)="resizeKey.emit($event)"
+  >
+    <span class="sr-only">Resize card</span>
+  </button>
+</article>
+@if (editing()) {
+  <app-card-settings
+    [value]="group.getRawValue()"
+    (saved)="save($event)"
+    (dismissed)="editing.set(false)"
+  />
+}
+
+@if (pickerOpen()) {
+  <app-input-type-picker (added)="addInput($event)" (dismissed)="pickerOpen.set(false)" />
+}

@@ -1,0 +1,25 @@
+<app-attribute-tabs
+  [tabs]="tabs.getRawValue()"
+  [activeId]="activeTabId"
+  [disabled]="group.disabled"
+  (selected)="selectedTabId.set($event)"
+  (added)="addTab()"
+  (edited)="editingTabId.set($event)"
+  (removed)="removeTab($event)"
+/>
+<div formArrayName="tabs" class="mt-2">
+  @for (tab of tabs.controls; track tab.controls.id.value; let index = $index) {
+    @if (tab.controls.id.value === activeTabId) {
+      <div [formGroupName]="index">
+        <app-attribute-canvas />
+      </div>
+    }
+  }
+</div>
+@if (editingTab; as tab) {
+  <app-tab-settings
+    [value]="tab.getRawValue()"
+    (saved)="saveTab($event)"
+    (dismissed)="editingTabId.set(null)"
+  />
+}

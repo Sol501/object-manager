@@ -1,0 +1,111 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+.single-input-incard {
+  position: relative;
+  min-width: 0;
+  min-height: 4.375rem;
+  padding: 0.1875rem;
+  border: 1px dashed transparent;
+  border-radius: 0.25rem;
+}
+.single-input-incard:hover,
+.single-input-incard:focus-within {
+  background: #fffaf0;
+  border-color: rgb(0 0 0 / 20%);
+}
+.single-canvas-card-actions {
+  position: absolute;
+  top: 0.3125rem;
+  right: 0.3125rem;
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0;
+  pointer-events: none;
+  background: #fffaf0;
+  z-index: 1;
+}
+.single-input-incard:hover .single-canvas-card-actions,
+.single-input-incard:focus-within .single-canvas-card-actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+.single-canvas-card-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.8125rem;
+  height: 1rem;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+.single-canvas-card-actions img {
+  width: 0.8125rem;
+  height: 0.8125rem;
+  opacity: 0.55;
+}
+.single-canvas-card-actions button:hover img {
+  opacity: 1;
+}
+.input-move {
+  cursor: move;
+  touch-action: none;
+}
+.form-group > label {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.preview-textarea {
+  height: auto;
+  min-height: 4.375rem;
+  border-radius: 0.25rem;
+  resize: vertical;
+}
+.form-check-input {
+  accent-color: #4b88bc;
+}
+.file-drop {
+  position: relative;
+  min-height: 9.375rem;
+  padding: 1.25rem;
+  background: white;
+  border: 0.125rem solid rgb(0 0 0 / 30%);
+}
+.file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.file-message {
+  display: block;
+  text-align: center;
+  margin: 2rem 0;
+  cursor: pointer;
+}
+.file-drop:focus-within {
+  outline: 0.1875rem solid var(--color-primary);
+}
+.file-name {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  color: var(--color-field-text);
+  font-size: 0.8125rem;
+}
+.file-name span {
+  overflow-wrap: anywhere;
+}
+.file-name button {
+  border: 0;
+  background: transparent;
+  color: var(--color-required);
+}
+@media (hover: none) {
+  .single-canvas-card-actions {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

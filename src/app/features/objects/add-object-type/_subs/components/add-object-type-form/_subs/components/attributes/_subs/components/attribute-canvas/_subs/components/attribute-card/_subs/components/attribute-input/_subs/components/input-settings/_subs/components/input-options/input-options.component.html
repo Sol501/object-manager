@@ -1,0 +1,44 @@
+<div class="form-container mt-2 pt-1">
+  <div formArrayName="options">
+    @for (
+      option of group.controls.options.controls;
+      track option.controls.id.value;
+      let index = $index
+    ) {
+      <div class="row mt-2 mb-3" [formGroupName]="index">
+        <div class="col-5">
+          <label [for]="`option-en-${index}`">Option name En</label
+          ><input
+            class="form-control"
+            type="text"
+            [id]="`option-en-${index}`"
+            formControlName="labelEn"
+          />
+        </div>
+        <div class="col-5">
+          <label [for]="`option-ar-${index}`">Option name Ar</label
+          ><input
+            class="form-control"
+            type="text"
+            dir="rtl"
+            [id]="`option-ar-${index}`"
+            formControlName="labelAr"
+          />
+        </div>
+        <div class="col-2 align-self-end">
+          <button
+            type="button"
+            class="remove-item"
+            title="Remove option"
+            (click)="removeOption(index)"
+          >
+            <img src="assets/images/delete-icon.svg" alt="Remove option" />
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+  <button type="button" class="btn add-item mt-2" (click)="addOption()">
+    <img src="assets/images/add-white.svg" alt="" />Add Option
+  </button>
+</div>

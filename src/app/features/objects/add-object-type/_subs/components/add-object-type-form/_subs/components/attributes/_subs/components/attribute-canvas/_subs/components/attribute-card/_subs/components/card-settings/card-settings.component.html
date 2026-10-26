@@ -1,0 +1,45 @@
+<app-dialog
+  title="Manage Card"
+  titleId="card-settings-title"
+  panel="side-small"
+  (dismissed)="dismissed.emit()"
+>
+  <div [formGroup]="form">
+    <div class="form-group">
+      <label for="attribute-card-title">Card Title</label>
+      <input type="text" id="attribute-card-title" class="form-control" formControlName="title" />
+    </div>
+    <div class="form-group">
+      <label for="attribute-card-color">Background color</label>
+      <div class="input-group color-picker">
+        <input
+          type="text"
+          id="attribute-card-color"
+          class="form-control"
+          formControlName="backgroundColor"
+          [class.is-invalid]="
+            form.controls.backgroundColor.touched && form.controls.backgroundColor.invalid
+          "
+        />
+        <input
+          type="color"
+          class="color-swatch"
+          title="Choose background color"
+          [value]="color"
+          (input)="setColor($any($event.target).value)"
+        />
+      </div>
+      @if (form.controls.backgroundColor.touched && form.controls.backgroundColor.invalid) {
+        <p class="field-error">Enter a hex color, such as #FFFFFF.</p>
+      }
+    </div>
+  </div>
+  <ng-container dialog-actions>
+    <button appButton="cancel" type="button" (click)="dismissed.emit()">
+      <img class="button-icon" src="assets/images/rejected.svg" alt="" />Cancel
+    </button>
+    <button appButton="submit" type="button" (click)="save()">
+      <img class="button-icon" src="assets/images/save-icon.svg" alt="" />Save
+    </button>
+  </ng-container>
+</app-dialog>

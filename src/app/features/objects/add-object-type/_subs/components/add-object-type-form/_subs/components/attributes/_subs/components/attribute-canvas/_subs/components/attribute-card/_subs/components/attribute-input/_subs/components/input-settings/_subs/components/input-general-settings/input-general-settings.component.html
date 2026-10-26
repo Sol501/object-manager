@@ -1,0 +1,97 @@
+<div class="form-container mt-2 pt-1">
+  <div formArrayName="translations">
+    @for (
+      translation of group.controls.translations.controls;
+      track translation;
+      let index = $index
+    ) {
+      <div class="row mt-2 mb-3" [formGroupName]="index">
+        <div class="col-sm-4">
+          <label [for]="`input-language-${index}`">Language</label>
+          <select class="form-control" [id]="`input-language-${index}`" formControlName="language">
+            @for (language of languages; track language) {
+              <option [value]="language" [disabled]="languageUsed(language, index)">
+                {{ language }}
+              </option>
+            }
+          </select>
+        </div>
+        <div class="col title-field">
+          <label [for]="`input-label-${index}`">Label</label>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Name"
+            [id]="`input-label-${index}`"
+            formControlName="label"
+          />
+        </div>
+        @if (index > 0) {
+          <div class="col-auto pl-0 align-self-end">
+            <button
+              type="button"
+              class="remove-item"
+              title="Remove language"
+              (click)="removeLanguage(index)"
+            >
+              <img src="assets/images/delete-icon.svg" alt="Remove language" />
+            </button>
+          </div>
+        }
+        <div class="col-sm-12 mt-2">
+          <label [for]="`input-description-${index}`">Description</label
+          ><textarea
+            class="form-control text-area"
+            placeholder="Enter Description"
+            [id]="`input-description-${index}`"
+            formControlName="description"
+          ></textarea>
+        </div>
+      </div>
+    }
+  </div>
+  <button
+    type="button"
+    class="btn add-item mb-3"
+    [disabled]="!referenceOnly() && group.controls.translations.length === languages.length"
+    (click)="addLanguage()"
+  >
+    <img src="assets/images/add-white.svg" alt="" />Add Language
+  </button>
+  <div class="row">
+    <div class="col-md-6 form-group">
+      <label for="input-data-type">Data type</label
+      ><select id="input-data-type" class="form-control" formControlName="dataType">
+        <option value="">Select</option>
+        <option>Boolean</option>
+        <option>Int</option>
+        <option>Char</option>
+      </select>
+    </div>
+    <div class="col-md-6 form-group">
+      <label for="input-priority">Priority</label
+      ><select id="input-priority" class="form-control" formControlName="priority">
+        <option value="">Select</option>
+        <option>High</option>
+        <option>Medium</option>
+        <option>Low</option>
+      </select>
+    </div>
+    <div class="col-md-6 form-group">
+      <label>Language dependent</label
+      ><app-toggle-switch
+        label="Language dependent"
+        [checked]="group.controls.languageDependent.value"
+        (changed)="group.controls.languageDependent.setValue($event)"
+      />
+    </div>
+    <div class="col-md-6 form-group">
+      <label>Required</label
+      ><app-toggle-switch
+        label="Required"
+        [checked]="group.controls.validation.controls.required.value"
+        (changed)="group.controls.validation.controls.required.setValue($event)"
+      />
+    </div>
+  </div>
+</div>

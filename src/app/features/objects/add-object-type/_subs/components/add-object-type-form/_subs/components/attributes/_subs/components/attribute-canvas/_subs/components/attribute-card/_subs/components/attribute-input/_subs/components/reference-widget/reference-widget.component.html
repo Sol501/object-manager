@@ -1,0 +1,15 @@
+<div
+  #host
+  class="reference-widget"
+  [class.gantt-widget]="group.controls.kind.value === 'gantt'"
+></div>
+@if (error()) {
+  <p class="field-error">{{ error() }}</p>
+}
+@if (manageColumns()) {
+  <app-gantt-columns
+    [value]="group.controls.columns.value"
+    (saved)="saveColumns($event)"
+    (dismissed)="manageColumns.set(false)"
+  />
+}

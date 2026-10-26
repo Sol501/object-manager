@@ -1,0 +1,56 @@
+.border-tabs {
+  padding-bottom: 0.5rem;
+}
+.border-tabs button {
+  border: 0;
+  padding: 0 0.75rem 0.5rem;
+  background: transparent;
+  color: #384e64;
+  font-weight: 700;
+  font-size: 0.8125rem;
+}
+.border-tabs button.active {
+  color: #b68a35;
+  border-bottom: 0.1875rem solid #b68a35;
+}
+.form-container {
+  display: block;
+}
+.title-field {
+  min-width: 0;
+}
+.text-area {
+  height: 4.6875rem;
+  border-radius: 0.4375rem;
+  resize: vertical;
+}
+.add-language {
+  padding: 0.15rem 0.75rem 0.25rem;
+  border-radius: 11.25rem;
+  background: #39afd1;
+  color: white;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+.add-language:hover {
+  background: #23475d;
+}
+.add-language img {
+  height: 1.125rem;
+  margin-right: 0.25rem;
+}
+.remove-language {
+  border: 0;
+  background: transparent;
+  padding: 0.25rem;
+}
+.remove-language img {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+@media (max-width: 35.9375rem) {
+  .title-field {
+    flex-basis: 100%;
+    margin-top: 0.5rem;
+  }
+}

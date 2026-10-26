@@ -1,0 +1,225 @@
+@if (advanced) {
+  <div
+    [class.single-input-incard]="
+      definition.kind === 'data-grid' || definition.kind === 'dynamic-grid'
+    "
+    [class.pt-4]="definition.kind === 'data-grid'"
+  >
+    @if (definition.kind === 'data-grid' || definition.kind === 'dynamic-grid') {
+      <div class="single-canvas-card-actions">
+        <button
+          type="button"
+          class="input-move"
+          title="Move"
+          (pointerdown)="moveStarted.emit($event)"
+          (keydown)="moveWithKeyboard($event)"
+        >
+          <img
+            src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/arrows-alt.svg"
+            alt="Move"
+          />
+        </button>
+        <button type="button" title="Manage Attributes" (click)="editing.set(true)">
+          <img
+            src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/pen.svg"
+            alt="Manage Attributes"
+          />
+        </button>
+        @if (canDuplicate) {
+          <button type="button" title="Duplicate" (click)="duplicated.emit()">
+            <img
+              src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/copy.svg"
+              alt="Duplicate"
+            />
+          </button>
+        }
+        <button type="button" title="Delete" (click)="removed.emit()">
+          <img
+            src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/trash-alt.svg"
+            alt="Delete"
+          />
+        </button>
+      </div>
+    }
+    @switch (definition.kind) {
+      @case ('data-grid') {
+        <app-reference-widget />
+      }
+      @case ('gantt') {
+        <app-reference-widget />
+      }
+      @case ('dynamic-grid') {
+        <app-dynamic-grid />
+      }
+      @case ('tasks-board') {
+        <app-tasks-board />
+      }
+    }
+  </div>
+} @else {
+  <div class="single-input-incard">
+    <div class="single-canvas-card-actions">
+      <button
+        type="button"
+        class="input-move"
+        title="Move"
+        [disabled]="group.disabled"
+        (pointerdown)="moveStarted.emit($event)"
+        (keydown)="moveWithKeyboard($event)"
+      >
+        <img src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/arrows-alt.svg" alt="Move" />
+      </button>
+      <button
+        type="button"
+        title="Manage Attributes"
+        [disabled]="group.disabled"
+        (click)="editing.set(true)"
+      >
+        <img
+          src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/pen.svg"
+          alt="Manage Attributes"
+        />
+      </button>
+      @if (canDuplicate) {
+        <button
+          type="button"
+          title="Duplicate"
+          [disabled]="group.disabled"
+          (click)="duplicated.emit()"
+        >
+          <img src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/copy.svg" alt="Duplicate" />
+        </button>
+      }
+      <button type="button" title="Delete" [disabled]="group.disabled" (click)="removed.emit()">
+        <img src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/trash-alt.svg" alt="Delete" />
+      </button>
+    </div>
+    <div class="form-group mb-2">
+      <label [for]="controlId"
+        >{{ label }}
+        @if (definition.validation.required) {
+          <span class="required-mark"> *</span>
+        }
+      </label>
+      @switch (definition.kind) {
+        @case ('text') {
+          <input
+            type="text"
+            [id]="controlId"
+            class="form-control"
+            [formControl]="preview"
+            (keydown.enter)="$event.preventDefault()"
+          />
+        }
+        @case ('number') {
+          <input
+            type="number"
+            [id]="controlId"
+            class="form-control"
+            [formControl]="preview"
+            (keydown.enter)="$event.preventDefault()"
+          />
+        }
+        @case ('date') {
+          <input
+            type="date"
+            [id]="controlId"
+            class="form-control"
+            [formControl]="preview"
+            (keydown.enter)="$event.preventDefault()"
+          />
+        }
+        @case ('textarea') {
+          <textarea
+            [id]="controlId"
+            class="form-control preview-textarea"
+            rows="3"
+            [formControl]="preview"
+          ></textarea>
+        }
+        @case ('select') {
+          <select [id]="controlId" class="form-control" [formControl]="preview">
+            <option value=""></option>
+            @for (option of definition.options; track option.id) {
+              <option [value]="option.id">{{ optionLabel(option) }}</option>
+            }
+          </select>
+        }
+        @case ('checkbox') {
+          @for (option of definition.options; track option.id) {
+            <div class="form-check mb-1">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [id]="`${controlId}-${option.id}`"
+                [checked]="checked(option.id)"
+                [disabled]="group.disabled"
+                (change)="toggleOption(option.id)"
+              /><label class="pt-1" [for]="`${controlId}-${option.id}`">{{
+                optionLabel(option)
+              }}</label>
+            </div>
+          }
+        }
+        @case ('radio') {
+          @for (option of definition.options; track option.id) {
+            <div class="form-check mb-1">
+              <input
+                type="radio"
+                class="form-check-input"
+                [id]="`${controlId}-${option.id}`"
+                [name]="controlId"
+                [value]="option.id"
+                [formControl]="preview"
+              /><label class="pt-1" [for]="`${controlId}-${option.id}`">{{
+                optionLabel(option)
+              }}</label>
+            </div>
+          }
+        }
+        @case ('file') {
+          <div class="file-drop" (dragover)="dragFiles($event)" (drop)="dropFiles($event)">
+            <input
+              type="file"
+              [id]="controlId"
+              multiple
+              class="file-input"
+              [disabled]="group.disabled"
+              (change)="selectFiles($event)"
+            />
+            <label class="file-message" [for]="controlId">Drop files here to upload</label>
+            @for (file of files; track $index) {
+              <div class="file-name">
+                <span>{{ file.name }}</span
+                ><button
+                  type="button"
+                  [title]="`Remove ${file.name}`"
+                  [disabled]="group.disabled"
+                  (click)="removeFile($index)"
+                >
+                  x
+                </button>
+              </div>
+            }
+          </div>
+        }
+      }
+    </div>
+  </div>
+}
+@if (editing()) {
+  @if (advanced) {
+    <app-advanced-input-settings
+      [value]="definition"
+      (saved)="saveAdvanced($event)"
+      (dismissed)="editing.set(false)"
+    />
+  } @else {
+    <app-input-settings
+      [value]="definition"
+      [fields]="fields"
+      (saved)="save($event)"
+      (dismissed)="editing.set(false)"
+    />
+  }
+}

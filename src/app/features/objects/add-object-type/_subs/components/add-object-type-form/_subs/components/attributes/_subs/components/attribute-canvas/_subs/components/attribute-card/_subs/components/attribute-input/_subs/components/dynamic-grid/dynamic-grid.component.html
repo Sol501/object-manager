@@ -1,0 +1,52 @@
+<div class="table-responsive">
+  <table class="table table-striped table-hover mb-0 dynamic-table-main">
+    <thead>
+      <tr>
+        @for (column of group.controls.columns.value; track $index) {
+          <th>{{ column }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of state.rows; track $index; let rowIndex = $index) {
+        <tr>
+          @for (cell of row; track $index) {
+            <td>
+              {{ cell }}
+              @if ($last) {
+                <button
+                  type="button"
+                  class="remove-row"
+                  title="Remove row"
+                  (click)="removeRow(rowIndex)"
+                >
+                  <img
+                    src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/trash-alt.svg"
+                    alt="Remove row"
+                  />
+                </button>
+              }
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+    <tfoot>
+      <tr>
+        @for (control of state.draft.controls; track control) {
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              [formControl]="control"
+              (keydown.enter)="$event.preventDefault()"
+            />
+          </td>
+        }
+      </tr>
+    </tfoot>
+  </table>
+</div>
+<button type="button" class="add-row-action p-3" (click)="addRow()">
+  <span class="mr-1">+</span>Add Row
+</button>

@@ -1,0 +1,33 @@
+.settings-tabs {
+  flex-wrap: wrap;
+  padding-bottom: 0.3125rem;
+}
+.settings-tabs button {
+  padding: 0 0.75rem 0.5rem;
+  border: 0;
+  border-bottom: 0.1875rem solid transparent;
+  background: transparent;
+  color: #384e64;
+  font-weight: 700;
+  font-size: 0.8125rem;
+}
+.settings-tabs button.active {
+  border-bottom-color: #4b88bc;
+  color: #4b88bc;
+}
+.add-column {
+  background: #39afd1;
+  color: #fff;
+  border-radius: 11.25rem;
+  font-size: 0.8125rem;
+}
+.add-column img {
+  width: 1.125rem;
+  margin-right: 0.25rem;
+}
+.remove-column {
+  border: 0;
+  background: transparent;
+  color: #d9534f;
+  padding: 0.25rem;
+}

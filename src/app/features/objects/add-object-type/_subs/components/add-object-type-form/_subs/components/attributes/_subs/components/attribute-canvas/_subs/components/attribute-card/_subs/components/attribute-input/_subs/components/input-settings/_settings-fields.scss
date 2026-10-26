@@ -1,0 +1,41 @@
+.form-container {
+  display: block;
+  background: transparent;
+  border-radius: 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 0.6rem;
+}
+.text-area {
+  height: 4.6875rem;
+  min-height: 4.6875rem;
+  border-radius: 0.4375rem;
+  resize: vertical;
+}
+.add-item {
+  padding: 0.15rem 0.75rem 0.25rem;
+  border-radius: 11.25rem;
+  background: #39afd1;
+  color: white;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+.add-item:hover {
+  background: #23475d;
+}
+.add-item img {
+  height: 1.125rem;
+  margin-right: 0.25rem;
+}
+.remove-item {
+  border: 0;
+  background: transparent;
+  padding: 0.25rem;
+}
+.remove-item img {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+.title-field {
+  min-width: 0;
+}

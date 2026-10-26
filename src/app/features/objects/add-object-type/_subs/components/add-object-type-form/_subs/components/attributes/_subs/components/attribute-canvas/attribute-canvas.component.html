@@ -1,0 +1,23 @@
+<div #canvas class="attribute-canvas" formArrayName="cards" [class.dragging]="preview()">
+  @for (card of cards.controls; track card.controls.id.value; let index = $index) {
+    <div
+      class="card-position"
+      [formGroupName]="index"
+      [style.grid-column]="`${layout(index).column} / span ${layout(index).columns}`"
+      [style.grid-row]="`${layout(index).row} / span ${layout(index).rows}`"
+      [style.--card-height]="`${layout(index).rows * 9.375 - 0.625}rem`"
+    >
+      <app-attribute-card
+        (removed)="removeCard(index)"
+        (moveStarted)="startPointer(index, $event, 'move')"
+        (resizeStarted)="startPointer(index, $event, 'resize')"
+        (moveKey)="changeWithKeyboard(index, $event, 'move')"
+        (resizeKey)="changeWithKeyboard(index, $event, 'resize')"
+      />
+    </div>
+  }
+</div>
+<button class="add-card-gridster" type="button" [disabled]="group.disabled" (click)="addCard()">
+  <img src="assets/images/add-widget.svg" alt="" />
+  <span>Add New Card</span>
+</button>

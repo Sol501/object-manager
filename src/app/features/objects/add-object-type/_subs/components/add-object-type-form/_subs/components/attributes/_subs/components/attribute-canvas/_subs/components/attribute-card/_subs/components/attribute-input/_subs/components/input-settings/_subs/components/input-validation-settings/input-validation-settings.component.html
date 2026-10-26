@@ -1,0 +1,53 @@
+<div class="form-container mt-2 pt-1">
+  <div class="form-group mt-2">
+    <label for="input-validate-on">Validate On</label
+    ><select id="input-validate-on" class="form-control" formControlName="validateOn">
+      <option>Change</option>
+      <option>Blur</option>
+    </select>
+  </div>
+  <div class="row mb-3">
+    <div class="col-4">
+      <label class="validation-check"
+        ><input type="checkbox" formControlName="required" />Required</label
+      >
+    </div>
+    <div class="col-4">
+      <label class="validation-check"
+        ><input type="checkbox" formControlName="unique" />Unique</label
+      >
+    </div>
+  </div>
+  <div class="row">
+    @for (limit of limits; track limit.name) {
+      <div class="col-sm-6 form-group">
+        <label [for]="`input-${limit.name}`">{{ limit.label }}</label
+        ><input
+          type="number"
+          min="0"
+          step="1"
+          class="form-control"
+          [id]="`input-${limit.name}`"
+          [formControlName]="limit.name"
+        />
+      </div>
+    }
+  </div>
+  <div class="form-group">
+    <label for="input-pattern">Regular Expression Pattern</label
+    ><input type="text" class="form-control" id="input-pattern" formControlName="pattern" />
+  </div>
+  <div class="form-group">
+    <label for="input-error-label">Error Label</label
+    ><input type="text" class="form-control" id="input-error-label" formControlName="errorLabel" />
+  </div>
+  <div class="form-group">
+    <label for="input-error-message">Custom Error Message</label
+    ><input
+      type="text"
+      class="form-control"
+      id="input-error-message"
+      formControlName="customMessage"
+    />
+  </div>
+</div>

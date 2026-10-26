@@ -1,0 +1,27 @@
+<app-dialog title="Select input type" titleId="input-picker-title" (dismissed)="dismissed.emit()">
+  <div class="input-types">
+    @for (type of types; track type.kind) {
+      <div class="single-category-box">
+        <input
+          type="radio"
+          name="attribute-input-kind"
+          [id]="`input-kind-${type.kind}`"
+          [checked]="selected() === type.kind"
+          (change)="selected.set(type.kind)"
+        />
+        <label class="input-type" [for]="`input-kind-${type.kind}`">
+          <img
+            [src]="`assets/images/${type.icon}`"
+            [class.calendar-icon]="type.kind === 'date'"
+            alt=""
+          />
+          <span>{{ type.label }}</span>
+        </label>
+      </div>
+    }
+  </div>
+  <ng-container dialog-actions>
+    <button appButton="submit" type="button" [disabled]="!selected()" (click)="add()">Add</button>
+    <button appButton="cancel" type="button" (click)="dismissed.emit()">Cancel</button>
+  </ng-container>
+</app-dialog>

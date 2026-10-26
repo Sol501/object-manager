@@ -1,0 +1,36 @@
+<div class="form-container mt-2 pt-1">
+  @for (category of sources; track category.label) {
+    <section class="card mt-2">
+      <header class="card-header">
+        <h3 class="card-title">{{ category.label }}</h3>
+      </header>
+      <div class="card-body p-2">
+        <div class="row">
+          @for (source of category.items; track source.label) {
+            <div class="col-sm-6">
+              <button
+                class="single-data-box d-flex align-items-center w-100"
+                type="button"
+                [class.active-ds]="group.controls.type.value === source.label"
+                (click)="choose(source.label)"
+              >
+                <img [src]="source.icon" alt="" /><span>{{ source.label }}</span>
+              </button>
+            </div>
+          }
+        </div>
+        @for (source of category.items; track source.label) {
+          @if (group.controls.type.value === source.label) {
+            <label for="input-data-source">Select Data Sorce</label
+            ><select id="input-data-source" class="form-control" formControlName="source">
+              <option>Data Sorce 1</option>
+              <option>Data Sorce 2</option>
+              <option>Data Sorce 3</option>
+              <option>Data Sorce 4</option>
+            </select>
+          }
+        }
+      </div>
+    </section>
+  }
+</div>

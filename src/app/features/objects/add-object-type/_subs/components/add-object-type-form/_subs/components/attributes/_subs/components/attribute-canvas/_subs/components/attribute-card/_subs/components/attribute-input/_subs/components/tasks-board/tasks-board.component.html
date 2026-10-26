@@ -1,0 +1,119 @@
+<div class="row mb-2">
+  <div class="col-md-9">
+    <ul class="task-list d-flex">
+      @for (filter of filters; track filter) {
+        <li [class.active]="$first">
+          <button type="button">{{ filter }}</button>
+        </li>
+      }
+    </ul>
+  </div>
+  <div class="col-md-3">
+    <button type="button" class="btn add-column float-right" (click)="addColumn()">
+      <img src="assets/images/add-white.svg" alt="" />Add Column
+    </button>
+  </div>
+</div>
+<div class="scrumboard">
+  <div class="board-columns">
+    @for (column of columns; track column.id; let ci = $index) {
+      <div
+        class="board-column pt-4"
+        [attr.data-board-column]="column.id"
+        [class.drop-target]="targetColumn() === column.id"
+      >
+        <h5 class="task-header">{{ column.title }}</h5>
+        <button
+          type="button"
+          class="remove-board-column"
+          title="Remove column"
+          (click)="removeColumn(ci)"
+        >
+          <img
+            src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/trash-alt.svg"
+            alt="Remove column"
+          />
+        </button>
+        @for (card of column.cards; track card.id; let ti = $index) {
+          <div
+            class="portlet"
+            [attr.data-board-card]="card.id"
+            [class.moving]="moving() === card.id"
+          >
+            <div class="portlet-header" (pointerdown)="startMove(card.id, $event)">
+              <div class="row">
+                <div class="col-6">
+                  <a href="#" (click)="$event.preventDefault()">{{ card.title }}</a>
+                </div>
+                <div class="col-6 task-actions">
+                  <button type="button" title="Remove task" (click)="removeCard(ci, ti)">×</button
+                  ><button type="button" title="Edit task">
+                    <img
+                      src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/pen.svg"
+                      alt="Edit task"
+                    /></button
+                  ><span title="Move task"
+                    ><img
+                      src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/arrows-alt.svg"
+                      alt="Move task"
+                  /></span>
+                </div>
+              </div>
+            </div>
+            <div class="portlet-content">
+              <p>{{ card.description }}</p>
+              <h6>
+                <img
+                  class="task-icon"
+                  src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/user-alt.svg"
+                  alt=""
+                />Assigned by: <strong>{{ card.assignedBy }}</strong>
+              </h6>
+              <h6>
+                <img
+                  class="task-icon"
+                  src="assets/vendor/fontawesome-free-5.9.0-web/svgs/regular/calendar-alt.svg"
+                  alt=""
+                />Due date: <strong>{{ card.dueDate }}</strong>
+              </h6>
+              <div class="row">
+                <div class="col-10">
+                  <div class="progress">
+                    <div
+                      class="progress-bar"
+                      [class]="`progress-bar ${card.color}`"
+                      [style.width.%]="card.progress"
+                    ></div>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <h6>{{ card.progress }}%</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>
+@if (naming()) {
+  <app-dialog title="Add Column" titleId="board-column-title" (dismissed)="naming.set(null)"
+    ><div class="form-container">
+      <label for="board-column-name">Column Title</label
+      ><input
+        id="board-column-name"
+        type="text"
+        class="form-control"
+        placeholder="Title"
+        [formControl]="title"
+      />
+    </div>
+    <ng-container dialog-actions
+      ><button type="button" appButton="submit" (click)="saveColumn()">Save</button
+      ><button type="button" appButton="cancel" (click)="naming.set(null)">
+        Cancel
+      </button></ng-container
+    ></app-dialog
+  >
+}

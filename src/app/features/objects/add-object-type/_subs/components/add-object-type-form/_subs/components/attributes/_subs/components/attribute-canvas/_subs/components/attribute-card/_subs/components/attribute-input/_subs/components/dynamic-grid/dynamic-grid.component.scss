@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+th {
+  background: #ecf1f4;
+  color: #5e707b;
+  font-size: 0.8125rem;
+}
+td {
+  color: #6d8295;
+  vertical-align: middle;
+}
+.add-row-action {
+  display: block;
+  border: 0;
+  background: transparent;
+  color: #4b88bc;
+  font-weight: 700;
+  width: 100%;
+  text-align: left;
+  font-size: 0.8125rem;
+}
+.remove-row {
+  border: 0;
+  background: transparent;
+  float: right;
+}
+.remove-row img {
+  width: 0.8125rem;
+  height: 0.8125rem;
+  filter: invert(43%) sepia(22%) saturate(1500%) hue-rotate(315deg);
+}
+.form-control {
+  min-width: 5rem;
+}

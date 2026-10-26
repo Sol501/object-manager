@@ -1,0 +1,22 @@
+<div class="form-container mt-2 pt-1">
+  <div class="form-group mt-2">
+    <label for="input-display">This component should Display</label
+    ><select id="input-display" class="form-control" formControlName="display">
+      <option [ngValue]="true">True</option>
+      <option [ngValue]="false">False</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="input-condition-field">When the form component</label
+    ><select id="input-condition-field" class="form-control" formControlName="fieldId">
+      <option value="">Select</option>
+      @for (field of fields(); track field.id) {
+        <option [value]="field.id">{{ field.label }}</option>
+      }
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="input-condition-value">Has the value</label
+    ><input type="text" id="input-condition-value" class="form-control" formControlName="equals" />
+  </div>
+</div>

@@ -1,0 +1,153 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+.task-list {
+  padding: 0;
+  list-style: none;
+  flex-wrap: wrap;
+}
+.task-list li {
+  padding-bottom: 0.125rem;
+}
+.task-list button {
+  border: 0;
+  background: transparent;
+  color: #373e43;
+  font-size: 0.75rem;
+  padding: 0.3125rem 0.625rem;
+  font-weight: 700;
+}
+.task-list .active {
+  background: #39afd1;
+  border-radius: 11.25rem;
+}
+.task-list .active button {
+  color: #fff;
+}
+.add-column {
+  background: #39afd1;
+  color: #fff;
+  border-radius: 11.25rem;
+  font-size: 0.8125rem;
+}
+.add-column img {
+  width: 1.125rem;
+  margin-right: 0.25rem;
+}
+.scrumboard {
+  background: #e8edf2;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  overflow-x: auto;
+}
+.board-columns {
+  display: flex;
+}
+.board-column {
+  flex: 1 0 15rem;
+  min-width: 0;
+  position: relative;
+  padding-inline: 0.9375rem;
+  border-right: 1px dashed #627ca2;
+  min-height: 6.25rem;
+}
+.board-column:last-child {
+  border-right: 0;
+}
+.task-header {
+  font-weight: 700;
+  font-size: 0.8125rem;
+  color: #384e64;
+  text-transform: uppercase;
+  position: absolute;
+  top: 0;
+  width: 84%;
+}
+.remove-board-column {
+  position: absolute;
+  top: 0;
+  right: 0.625rem;
+  border: 0;
+  background: transparent;
+  opacity: 0;
+}
+.remove-board-column img {
+  width: 0.8125rem;
+  height: 0.8125rem;
+  filter: invert(43%) sepia(22%) saturate(1500%) hue-rotate(315deg);
+}
+.board-column:hover .remove-board-column,
+.remove-board-column:focus {
+  opacity: 1;
+}
+.portlet {
+  margin-bottom: 1rem;
+  box-shadow: 0 0 0.25rem rgb(106 150 183 / 16%);
+  border-radius: 0.25rem;
+  background: #fff;
+}
+.portlet-header {
+  padding: 0.2rem 0.3rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  cursor: move;
+  touch-action: none;
+}
+.portlet-header a {
+  color: #295989;
+  font-weight: 700;
+  font-size: 0.8125rem;
+}
+.task-actions {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: start;
+  padding-left: 0;
+}
+.task-actions button,
+.task-actions span {
+  border: 0;
+  background: transparent;
+  color: #7a8994;
+  margin: 1px 0.3125rem 0;
+  padding: 0;
+  line-height: 1;
+}
+.task-actions img {
+  width: 0.75rem;
+  height: 0.75rem;
+  opacity: 0.55;
+}
+.portlet-content {
+  padding: 0 0.8rem;
+}
+.portlet-content p,
+.portlet-content h6 {
+  font-size: 0.75rem;
+}
+.task-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  margin-right: 0.625rem;
+  opacity: 0.55;
+}
+.progress {
+  height: 0.375rem;
+  margin-top: 0.25rem;
+}
+.success {
+  background: #46bd9b;
+}
+.warning {
+  background: #f5970b;
+}
+.danger {
+  background: #c4514e;
+}
+.moving {
+  opacity: 0.5;
+}
+.drop-target {
+  background: rgb(57 175 209 / 8%);
+}

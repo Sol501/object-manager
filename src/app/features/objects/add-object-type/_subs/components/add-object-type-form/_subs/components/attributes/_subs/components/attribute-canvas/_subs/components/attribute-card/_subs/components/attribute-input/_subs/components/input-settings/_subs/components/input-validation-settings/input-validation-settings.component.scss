@@ -1,0 +1,11 @@
+@use '../../../settings-fields';
+.validation-check {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+.validation-check input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #4b88bc;
+}

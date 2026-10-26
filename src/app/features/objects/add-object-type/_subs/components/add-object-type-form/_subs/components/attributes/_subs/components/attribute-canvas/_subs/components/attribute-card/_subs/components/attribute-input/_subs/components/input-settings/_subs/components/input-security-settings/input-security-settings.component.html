@@ -1,0 +1,14 @@
+<div class="form-container mt-2 pt-1">
+  <div class="form-group mt-2">
+    <label for="input-personas">Personas</label
+    ><app-multi-select
+      controlId="input-personas"
+      [options]="personas"
+      formControlName="personaIds"
+    />
+  </div>
+  <div class="form-group">
+    <label for="input-roles">Roles</label
+    ><app-multi-select controlId="input-roles" [options]="roles" formControlName="roleIds" />
+  </div>
+</div>

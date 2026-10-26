@@ -1,0 +1,77 @@
+<div class="dynamic-tabs-container">
+  <div #strip class="tab-strip" (scroll)="updateScroll()">
+    <nav class="nav nav-tabs dynamic-tabs">
+      @for (tab of tabs(); track tab.id; let first = $first) {
+        <div class="tab-item" [class.active]="activeId() === tab.id">
+          <button
+            class="nav-link"
+            type="button"
+            [class.active]="activeId() === tab.id"
+            [disabled]="disabled()"
+            (click)="selected.emit(tab.id)"
+          >
+            {{ tab.translations[0].title || 'Step Title' }}
+          </button>
+          <button
+            class="tab-action edit"
+            type="button"
+            title="Edit tab"
+            [disabled]="disabled()"
+            (click)="edited.emit(tab.id)"
+          >
+            <img src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/pen.svg" alt="Edit tab" />
+          </button>
+          @if (!first) {
+            <button
+              class="tab-action remove"
+              type="button"
+              title="Remove tab"
+              [disabled]="disabled()"
+              (click)="removed.emit(tab.id)"
+            >
+              <img
+                src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/times.svg"
+                alt="Remove tab"
+              />
+            </button>
+          }
+        </div>
+      }
+    </nav>
+  </div>
+  @if (canScrollLeft()) {
+    <button
+      type="button"
+      class="scroller scroller-left"
+      title="Scroll tabs left"
+      (click)="scroll(-1)"
+    >
+      <img
+        src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/chevron-left.svg"
+        alt="Scroll tabs left"
+      />
+    </button>
+  }
+  @if (canScrollRight()) {
+    <button
+      type="button"
+      class="scroller scroller-right"
+      title="Scroll tabs right"
+      (click)="scroll(1)"
+    >
+      <img
+        src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/chevron-right.svg"
+        alt="Scroll tabs right"
+      />
+    </button>
+  }
+  <button
+    type="button"
+    class="add-tab"
+    title="Add new tab"
+    [disabled]="disabled()"
+    (click)="added.emit()"
+  >
+    <img src="assets/vendor/fontawesome-free-5.9.0-web/svgs/solid/plus.svg" alt="Add new tab" />
+  </button>
+</div>

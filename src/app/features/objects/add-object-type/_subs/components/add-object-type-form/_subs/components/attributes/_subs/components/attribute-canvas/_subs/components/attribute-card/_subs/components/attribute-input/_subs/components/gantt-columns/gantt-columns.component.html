@@ -1,0 +1,34 @@
+<app-dialog title="Manage Columns" titleId="gantt-columns-title" (dismissed)="dismissed.emit()">
+  <div class="form-container">
+    @for (column of columns.controls; track column; let i = $index) {
+      <div class="form-group row align-items-end">
+        <div class="col-11">
+          <label [for]="`gantt-column-${i}`">Select Column</label
+          ><select class="form-control" [id]="`gantt-column-${i}`" [formControl]="column">
+            @for (choice of choices; track choice.value) {
+              <option [value]="choice.value">{{ choice.label }}</option>
+            }
+          </select>
+        </div>
+        <button
+          type="button"
+          class="remove-column"
+          title="Remove column"
+          (click)="columns.removeAt(i)"
+        >
+          ×
+        </button>
+      </div>
+    }
+    <button type="button" class="btn add-column" (click)="add()">
+      <img src="assets/images/add-white.svg" alt="" />Add Column
+    </button>
+  </div>
+  <ng-container dialog-actions
+    ><button type="button" appButton="submit" (click)="saved.emit(columns.getRawValue())">
+      Save</button
+    ><button type="button" appButton="cancel" (click)="dismissed.emit()">
+      Cancel
+    </button></ng-container
+  >
+</app-dialog>
