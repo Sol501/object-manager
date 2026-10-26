@@ -10,6 +10,7 @@ import { authInterceptor } from './core/auth/auth.interceptor';
 import { initializeAuth } from './core/auth/auth.initializer';
 import { AuthEffects } from './core/auth/state/auth.effects';
 import { authFeatureKey, authReducer } from './core/auth/state/auth.reducer';
+import { mockApiInterceptor } from './core/mock-api/mock-api.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,7 @@ import { authFeatureKey, authReducer } from './core/auth/state/auth.reducer';
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, mockApiInterceptor])),
     provideAppInitializer(initializeAuth),
   ],
   bootstrap: [AppComponent],
