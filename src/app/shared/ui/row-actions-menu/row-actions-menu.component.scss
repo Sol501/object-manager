@@ -1,0 +1,38 @@
+.single-card-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.3125rem;
+  height: 1.1875rem;
+  border: 0;
+  border-radius: 11.25rem;
+  padding: 0 0.25rem;
+  background: var(--color-row-action);
+  color: var(--color-row-action-icon);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.single-card-actions:disabled {
+  opacity: 0.65;
+}
+.row-menu {
+  position: fixed;
+  z-index: 30;
+  width: 10rem;
+  margin: 0;
+  padding: 0.3125rem 0;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+.dropdown-item {
+  padding: 0.1875rem 0.5625rem;
+  font-size: 0.75rem;
+}
+.dropdown-item.text-danger {
+  color: var(--color-required) !important;
+}
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background: var(--color-menu-hover);
+}

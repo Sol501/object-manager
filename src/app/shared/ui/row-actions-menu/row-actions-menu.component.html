@@ -1,0 +1,32 @@
+<button
+  #trigger
+  class="single-card-actions"
+  type="button"
+  [disabled]="disabled()"
+  (click)="toggleMenu($event)"
+  (keydown.arrowdown)="openMenu($event)"
+>
+  <span>···</span>
+</button>
+@if (position(); as current) {
+  <div
+    #menuElement
+    [id]="menuId()"
+    class="dropdown-menu show row-menu"
+    role="menu"
+    [style.top.rem]="current.top"
+    [style.left.rem]="current.left"
+    (keydown.arrowdown)="$event.preventDefault()"
+    (keydown.arrowup)="$event.preventDefault()"
+  >
+    <button
+      #removeButton
+      class="dropdown-item text-danger"
+      type="button"
+      role="menuitem"
+      (click)="remove()"
+    >
+      Remove
+    </button>
+  </div>
+}

@@ -1,0 +1,23 @@
+<label class="toggle-switch">
+  <span [class]="showLabel() ? 'd-block mb-2' : 'sr-only'">{{
+    label()
+  }}</span>
+  <span class="switch-control">
+    <input
+      #checkbox
+      class="switch-input"
+      type="checkbox"
+      role="switch"
+      [checked]="checked()"
+      [disabled]="disabled()"
+      (change)="changed.emit(checkbox.checked)"
+      (blur)="blurred.emit()"
+    />
+    <span
+      class="switch-track"
+    ></span>
+    <span
+      class="switch-thumb"
+    ></span>
+  </span>
+</label>

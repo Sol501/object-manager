@@ -1,0 +1,67 @@
+<button
+  #trigger
+  class="form-control select-trigger d-flex align-items-center justify-content-between"
+  type="button"
+  [id]="controlId()"
+  [disabled]="disabled()"
+  [class]="(invalid()) ? 'is-invalid' : ''"
+  (click)="toggle()"
+  (keydown)="onTriggerKeydown($event)"
+>
+  <span class="text-truncate">{{ selectedLabel() }}</span>
+  <span
+    class="select-arrow"
+    [class.open]="opened()"
+  ></span>
+</button>
+
+@if (opened()) {
+  <div
+    class="select-popup"
+    role="dialog"
+    [id]="`${controlId()}-popup`"
+  >
+    <div class="p-1">
+      <input
+        #search
+        class="select-search"
+        type="text"
+        role="combobox"
+        autocomplete="off"
+        [value]="query()"
+        [disabled]="disabled()"
+        (input)="filter(search.value)"
+        (keydown)="onSearchKeydown($event)"
+      />
+    </div>
+    <div
+      class="select-options"
+      role="listbox"
+      tabindex="-1"
+      [id]="`${controlId()}-options`"
+    >
+      @for (option of filteredOptions(); track option.id; let index = $index) {
+        <button
+          class="select-option"
+          [class.highlighted]="activeIndex() === index"
+          [class.text-white]="activeIndex() === index"
+          [class.selected]="activeIndex() !== index && value() === option.id"
+          type="button"
+          role="option"
+          tabindex="-1"
+          [id]="`${controlId()}-option-${index}`"
+          [attr.data-option-index]="index"
+          [disabled]="disabled()"
+          (mousedown)="$event.preventDefault()"
+          (mouseenter)="activeIndex.set(index)"
+          (click)="select(option)"
+        >
+          {{ option.label }}
+        </button>
+      }
+    </div>
+    @if (!filteredOptions().length) {
+      <p class="select-empty" role="status">No results found</p>
+    }
+  </div>
+}

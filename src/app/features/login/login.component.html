@@ -21,9 +21,7 @@
         @if (form.controls.email.touched && form.controls.email.invalid) {
           <p class="field-error" id="email-error">
             {{
-              form.controls.email.hasError('required')
-                ? 'Enter your email'
-                : 'Enter a valid email'
+              form.controls.email.hasError('required') ? 'Enter your email' : 'Enter a valid email'
             }}
           </p>
         }
@@ -62,11 +60,7 @@
         </p>
       }
 
-      <button
-        class="btn app-button button-regular btn-primary w-100"
-        type="submit"
-        [disabled]="auth.isLoading()"
-      >
+      <button appButton class="w-100" type="submit" [disabled]="auth.isLoading()">
         {{ auth.isLoading() ? 'Logging in...' : 'Login' }}
       </button>
       <span class="sr-only">

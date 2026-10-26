@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthFacade } from '../../core/auth/auth.facade.service';
+import { AppHeaderComponent } from '../../shared/ui/app-header/app-header.component';
+import { ButtonDirective } from '../../shared/ui/button/button.directive';
 
 @Component({
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, AppHeaderComponent, ButtonDirective],
   selector: 'app-objects',
   host: { class: 'd-block' },
   styleUrl: './objects.component.scss',

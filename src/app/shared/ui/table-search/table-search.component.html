@@ -1,0 +1,21 @@
+<div
+  class="input-group card-header-search"
+>
+  <input
+    #search
+    class="form-control search-input"
+    type="search"
+    placeholder="Search"
+    [autofocus]="autofocus()"
+    [value]="value()"
+    (input)="changed.emit(search.value)"
+    (keydown.enter)="$event.preventDefault()"
+  />
+  <button
+    class="btn search-button"
+    type="button"
+    (click)="search.focus()"
+  >
+    <img class="search-icon" src="assets/images/search.svg" alt="" />
+  </button>
+</div>

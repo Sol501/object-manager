@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthFacade } from '../../core/auth/auth.facade.service';
+import { ButtonDirective } from '../../shared/ui/button/button.directive';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ButtonDirective],
   host: { class: 'd-block' },
   styleUrl: './login.component.scss',
   templateUrl: './login.component.html',
