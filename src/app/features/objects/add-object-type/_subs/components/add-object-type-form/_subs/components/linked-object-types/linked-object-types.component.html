@@ -1,0 +1,83 @@
+<section class="card">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <h2 class="card-title">Linked object types</h2>
+    <button
+      class="header-actions"
+      type="button"
+      title="Add Relationship"
+      [disabled]="busy()"
+      (click)="dialogOpen.set(true)"
+    >
+      <img class="add-icon" src="assets/images/add.svg" alt="Add Relationship" />
+    </button>
+  </div>
+  <div class="card-body p-2">
+    <div class="row">
+      <div class="col-12 col-lg-5">
+        <div class="table-main">
+          <table appTable>
+            <colgroup>
+              <col class="id-column" />
+              <col class="name-column" />
+              <col class="name-column" />
+              <col class="actions-column" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th class="text-left">Active Name</th>
+                <th class="text-left">Passive Name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+          </table>
+          <div class="relationship-rows">
+            <table appTable>
+              <colgroup>
+                <col class="id-column" />
+                <col class="name-column" />
+                <col class="name-column" />
+                <col class="actions-column" />
+              </colgroup>
+              <tbody>
+                @for (row of rows; track row.key) {
+                  <tr>
+                    <td>{{ row.id }}</td>
+                    <td class="text-left">
+                      <a class="table-row-title" href="#" (click)="$event.preventDefault()">{{
+                        row.activeName
+                      }}</a>
+                    </td>
+                    <td class="text-left">
+                      <a class="table-row-title" href="#" (click)="$event.preventDefault()">{{
+                        row.passiveName
+                      }}</a>
+                    </td>
+                    <td>
+                      <app-row-actions-menu
+                        [label]="row.activeName"
+                        [menuId]="`relationship-menu-${row.key}`"
+                        [items]="rowActions"
+                        [disabled]="busy() || !active()"
+                      />
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-7">
+        <div class="dashed-border">
+          @defer (when active()) {
+            <app-relationship-chart />
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+@if (dialogOpen()) {
+  <app-relationship-dialog (closed)="dialogOpen.set(false)" />
+}

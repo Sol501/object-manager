@@ -1,0 +1,63 @@
+<section class="card">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <h2 class="card-title">Actions</h2>
+    <button
+      class="header-actions"
+      type="button"
+      title="Link Actions"
+      [disabled]="busy()"
+      (click)="dialogOpen.set(true)"
+    >
+      <img class="add-icon" src="assets/images/add.svg" alt="Link Actions" />
+    </button>
+  </div>
+  <div class="card-body p-2">
+    <div class="table-main">
+      <table appTable>
+        <colgroup>
+          <col class="id-column" />
+          <col class="name-column" />
+          <col class="actions-column" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th class="text-left">Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+      </table>
+      <div class="action-rows">
+        <table appTable>
+          <colgroup>
+            <col class="id-column" />
+            <col class="name-column" />
+            <col class="actions-column" />
+          </colgroup>
+          <tbody>
+            @for (row of rows; track row) {
+              <tr>
+                <td>4312</td>
+                <td class="text-left">
+                  <a class="table-row-title" href="#" (click)="$event.preventDefault()"
+                    >Define Risk</a
+                  >
+                </td>
+                <td>
+                  <app-row-actions-menu
+                    label="Define Risk"
+                    [menuId]="`object-type-action-menu-${row}`"
+                    [disabled]="busy() || !active()"
+                  />
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+@if (dialogOpen()) {
+  <app-object-type-actions-dialog (closed)="dialogOpen.set(false)" />
+}

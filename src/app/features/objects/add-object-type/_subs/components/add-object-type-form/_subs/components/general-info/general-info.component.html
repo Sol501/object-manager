@@ -1,0 +1,83 @@
+<section class="card">
+  <div class="card-header">
+    <h2 class="card-title">General info</h2>
+  </div>
+  <div class="card-body p-2">
+    <div class="form-container general-info-fields">
+      <div class="row">
+        <div class="col-sm-12 col-md-4">
+          <div class="form-group">
+            <label for="object-type-code">Code</label>
+            <input id="object-type-code" class="form-control" type="text" formControlName="code" />
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+          <div class="form-group">
+            <label for="object-type-prefix">Prefix</label>
+            <input id="object-type-prefix" class="form-control" type="text" formControlName="prefix" />
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+          <div class="form-group">
+            <label for="object-type-icon">Icon</label>
+            <app-icon-upload formControlName="icon" />
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="object-type-name">Type name</label>
+            <input id="object-type-name" class="form-control" type="text" formControlName="name" />
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="object-type-description">Description</label>
+            <textarea
+              id="object-type-description"
+              class="form-control text-area"
+              formControlName="description"
+              placeholder="Enter Idea details"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <div class="form-group mb-0 mt-1">
+            <app-toggle-switch
+              label="Protected"
+              [showLabel]="true"
+              [checked]="group.controls.protected.value"
+              [disabled]="group.controls.protected.disabled"
+              (changed)="setToggle('protected', $event)"
+              (blurred)="group.controls.protected.markAsTouched()"
+            />
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <div class="form-group mb-0 mt-1">
+            <app-toggle-switch
+              label="Measurable"
+              [showLabel]="true"
+              [checked]="group.controls.measurable.value"
+              [disabled]="group.controls.measurable.disabled"
+              (changed)="setToggle('measurable', $event)"
+              (blurred)="group.controls.measurable.markAsTouched()"
+            />
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <div class="form-group mb-0 mt-1">
+            <app-toggle-switch
+              label="Audit trail"
+              [showLabel]="true"
+              [checked]="group.controls.auditTrail.value"
+              [disabled]="group.controls.auditTrail.disabled"
+              (changed)="setToggle('auditTrail', $event)"
+              (blurred)="group.controls.auditTrail.markAsTouched()"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

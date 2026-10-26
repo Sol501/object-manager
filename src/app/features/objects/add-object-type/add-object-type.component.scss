@@ -1,0 +1,15 @@
+.object-type-page {
+  padding-top: 1.4375rem;
+  padding-bottom: 2rem;
+}
+
+.object-type-actions {
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 36rem) {
+  .object-type-form-panel {
+    margin: 0 0.9375rem;
+  }
+}

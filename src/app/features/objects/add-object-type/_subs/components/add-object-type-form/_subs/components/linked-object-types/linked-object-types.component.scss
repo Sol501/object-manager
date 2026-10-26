@@ -1,0 +1,22 @@
+.row {
+  margin-inline: -0.46875rem;
+}
+.row > .col-12 {
+  padding-inline: 0.46875rem;
+}
+.id-column,
+.actions-column {
+  width: 15%;
+}
+.name-column {
+  width: 35%;
+}
+.relationship-rows {
+  height: 18.75rem;
+  overflow: auto;
+}
+.dashed-border {
+  border: 0.125rem dashed rgb(0 0 0 / 20%);
+  border-radius: 0.25rem;
+  min-width: 0;
+}

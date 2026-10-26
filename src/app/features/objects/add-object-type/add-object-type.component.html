@@ -1,0 +1,67 @@
+<div class="app-page">
+  <app-header (logout)="logout()" />
+
+  <main class="app-container object-type-page">
+    <nav class="mb-3">
+      <ol class="breadcrumb mb-0">
+        <li><a class="font-weight-bold" routerLink="/objects">My Views</a></li>
+        <li>/</li>
+        <li><a class="font-weight-bold" routerLink="/objects">Object Type List</a></li>
+        <li>/</li>
+        <li class="table-row-title">Add New Object Type</li>
+      </ol>
+    </nav>
+
+    <app-stepper
+      [steps]="steps"
+      [activeStep]="activeStep()"
+      [availableThrough]="(objectTypeForm()?.furthestStep() ?? -1) + 1"
+      [disabled]="facade.saving() || !objectTypeForm()"
+      (stepSelected)="objectTypeForm()?.goToStep($event)"
+    />
+
+    <div class="object-type-form-panel">
+      <app-add-object-type-form
+        [busy]="facade.saving()"
+        (submitted)="facade.save($event, 'submitted')"
+        (draftRequested)="facade.save($event, 'draft')"
+        (edited)="facade.clearResult()"
+      />
+
+      <footer class="object-type-actions d-flex flex-wrap justify-content-end">
+        @if (activeStep() > 0) {
+          <button appButton="previous" class="mr-auto" type="button" [disabled]="facade.saving()" (click)="objectTypeForm()?.previous()">
+            <img class="step-arrow" src="assets/images/left-arrow.svg" alt="" />Previous
+          </button>
+        }
+        <a appButton="cancel" routerLink="/objects">
+          <img class="button-icon" src="assets/images/rejected.svg" alt="" />Cancel
+        </a>
+        @if (activeStep() === steps.length - 1) {
+          <button appButton="draft" type="button" [disabled]="facade.saving()" (click)="objectTypeForm()?.saveDraft()">
+            <img class="button-icon" src="assets/images/save-icon.svg" alt="" />Draft
+          </button>
+          <button appButton="submit" type="submit" form="add-object-type-form" [disabled]="facade.saving()">
+            <img class="button-icon" src="assets/images/submit.svg" alt="" />Submit
+          </button>
+        } @else {
+          <button appButton="next" type="button" [disabled]="facade.saving()" (click)="objectTypeForm()?.next()">
+            Next<img class="step-arrow" src="assets/images/right-arrow.svg" alt="" />
+          </button>
+        }
+      </footer>
+    </div>
+
+    @if (facade.saving()) {
+      <p class="save-status text-muted mt-3" role="status">Saving object type...</p>
+    }
+    @if (facade.error(); as error) {
+      <p class="alert alert-danger mt-3" role="alert">{{ error }}</p>
+    }
+    @if (facade.saved(); as saved) {
+      <p class="alert alert-success mt-3" role="status">
+        {{ saved.status === 'draft' ? 'Draft saved.' : 'Object type submitted.' }}
+      </p>
+    }
+  </main>
+</div>

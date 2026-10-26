@@ -1,0 +1,58 @@
+<app-dialog title="Actions" titleId="object-type-actions-dialog-title" (dismissed)="closed.emit()">
+  <app-table-search
+    dialog-tools
+    label="Search actions"
+    [value]="group.controls.search.value"
+    (changed)="setSearch($event)"
+  />
+  <div class="table-main">
+    <table appTable>
+      <colgroup>
+        <col class="action-select-column" />
+        <col class="action-id-column" />
+        <col class="action-picker-name-column" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>ID</th>
+          <th class="text-left">Name</th>
+        </tr>
+      </thead>
+    </table>
+    <div class="picker-rows">
+      <table appTable>
+        <colgroup>
+          <col class="action-select-column" />
+          <col class="action-id-column" />
+          <col class="action-picker-name-column" />
+        </colgroup>
+        <tbody>
+          @for (control of group.controls.selection.controls; track control; let index = $index) {
+            <tr>
+              <td>
+                <app-toggle-switch
+                  [label]="`Select Define Risk row ${index + 1}`"
+                  [checked]="control.value"
+                  [disabled]="control.disabled"
+                  (changed)="select(index, $event)"
+                  (blurred)="control.markAsTouched()"
+                />
+              </td>
+              <td>4312</td>
+              <td class="text-left">
+                <a class="table-row-title" href="#" (click)="$event.preventDefault()"
+                  >Define Risk</a
+                >
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div dialog-actions class="d-flex dialog-buttons">
+    <button appButton="submit" type="button" (click)="closed.emit()">Add</button>
+    <button appButton="cancel" type="button" (click)="closed.emit()">Cancel</button>
+  </div>
+</app-dialog>

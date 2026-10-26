@@ -9,6 +9,12 @@ export const objectsRoutes: Routes = [
     title: 'Objects',
   },
   {
+    path: 'types',
+    loadComponent: () =>
+      import('./add-object-type/add-object-type.component').then((module) => module.AddObjectTypeComponent),
+    title: 'Add Object Type',
+  },
+  {
     path: 'add',
     loadComponent: () =>
       import('./add-object/add-object.component').then((module) => module.AddObjectComponent),

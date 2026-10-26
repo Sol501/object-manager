@@ -1,0 +1,76 @@
+<app-dialog
+  title="Add Relationship"
+  titleId="relationship-dialog-title"
+  size="medium"
+  (dismissed)="closed.emit()"
+>
+  <div class="form-container">
+    <div class="row">
+      <div class="col-12 col-lg-4">
+        <div class="form-group">
+          <label for="relationship-id">ID</label>
+          <input id="relationship-id" type="text" class="form-control" formControlName="id" />
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="form-group">
+          <label for="relationship-active-name">Active name</label>
+          <input
+            id="relationship-active-name"
+            type="text"
+            class="form-control"
+            formControlName="activeName"
+          />
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="form-group">
+          <label for="relationship-passive-name">Passive name</label>
+          <input
+            id="relationship-passive-name"
+            type="text"
+            class="form-control"
+            formControlName="passiveName"
+          />
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="relationship-target">Target object type name</label>
+          <select
+            id="relationship-target"
+            class="form-control"
+            formControlName="targetObjectTypeName"
+          >
+            <option>Object type name</option>
+            <option>Object type name</option>
+            <option>Object type name</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="form-group">
+          <label for="relationship-impact">Impact</label>
+          <select id="relationship-impact" class="form-control" formControlName="impact">
+            <option>Very high</option>
+            <option>Medium</option>
+            <option>Very low</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="form-group">
+          <label for="relationship-relation">Relation</label>
+          <select id="relationship-relation" class="form-control" formControlName="relation">
+            <option>One to Many</option>
+            <option>Many to Many</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div dialog-actions class="d-flex relationship-actions">
+    <button appButton="submit" type="button" (click)="closed.emit()">Add</button>
+    <button appButton="cancel" type="button" (click)="closed.emit()">Cancel</button>
+  </div>
+</app-dialog>

@@ -1,0 +1,17 @@
+<form id="add-object-type-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+  <fieldset formGroupName="generalInfo" [disabled]="busy()" [hidden]="activeStep() !== 0">
+    <app-general-info />
+  </fieldset>
+  <fieldset formGroupName="attributes" [disabled]="busy()" [hidden]="activeStep() !== 1">
+    <app-attributes />
+  </fieldset>
+  <fieldset formGroupName="responsibilities" [disabled]="busy()" [hidden]="activeStep() !== 2">
+    <app-responsibilities [active]="activeStep() === 2" [busy]="busy()" />
+  </fieldset>
+  <fieldset formGroupName="linkedObjectTypes" [disabled]="busy()" [hidden]="activeStep() !== 3">
+    <app-linked-object-types [active]="activeStep() === 3" [busy]="busy()" />
+  </fieldset>
+  <fieldset formGroupName="actions" [disabled]="busy()" [hidden]="activeStep() !== 4">
+    <app-object-type-actions [active]="activeStep() === 4" [busy]="busy()" />
+  </fieldset>
+</form>

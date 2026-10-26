@@ -1,0 +1,64 @@
+<section class="card">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <h2 class="card-title">Responsibilities</h2>
+    <button
+      class="header-actions"
+      type="button"
+      title="Add Responsibility"
+      [disabled]="busy()"
+      (click)="dialogOpen.set(true)"
+    >
+      <img class="add-icon" src="assets/images/add.svg" alt="Add Responsibility" />
+    </button>
+  </div>
+  <div class="card-body p-2">
+    <div class="table-main">
+      <table appTable>
+        <colgroup>
+          <col class="user-column" />
+          <col class="responsibility-column" />
+          <col class="actions-column" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="text-left">User Name</th>
+            <th class="text-left">Responsibility</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+      </table>
+      <div class="responsibility-rows">
+        <table appTable>
+          <colgroup>
+            <col class="user-column" />
+            <col class="responsibility-column" />
+            <col class="actions-column" />
+          </colgroup>
+          <tbody>
+            @for (row of rows; track row.id) {
+              <tr>
+                <td class="text-left">
+                  <a class="table-row-title" href="#" (click)="$event.preventDefault()">{{
+                    row.userName
+                  }}</a>
+                </td>
+                <td class="text-left">{{ row.responsibility }}</td>
+                <td>
+                  <app-row-actions-menu
+                    [label]="row.userName"
+                    [menuId]="`responsibility-menu-${row.id}`"
+                    [showEdit]="true"
+                    [disabled]="busy() || !active()"
+                  />
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+@if (dialogOpen()) {
+  <app-responsibility-dialog (closed)="dialogOpen.set(false)" />
+}

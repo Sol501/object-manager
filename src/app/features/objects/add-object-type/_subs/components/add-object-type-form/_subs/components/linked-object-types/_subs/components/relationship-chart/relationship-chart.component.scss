@@ -1,0 +1,23 @@
+app-relationship-chart {
+  display: block;
+
+  .tree {
+    height: 15rem;
+  }
+  .tree h4 {
+    text-transform: none;
+    font-size: 0.75rem;
+    font-weight: normal;
+    text-align: left;
+    margin-left: 0.625rem !important;
+  }
+  .tree p {
+    font-size: 0.8125rem;
+    line-height: 1rem;
+  }
+  .highcharts-plot-border,
+  .highcharts-series-group,
+  .highcharts-organization-series {
+    overflow: visible !important;
+  }
+}

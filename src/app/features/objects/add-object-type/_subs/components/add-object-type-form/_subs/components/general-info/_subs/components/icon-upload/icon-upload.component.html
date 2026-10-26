@@ -1,0 +1,14 @@
+<div class="custom-file">
+  <input
+    #fileInput
+    id="object-type-icon"
+    type="file"
+    class="custom-file-input"
+    [disabled]="disabled()"
+    (change)="selectFile(fileInput)"
+    (blur)="blur()"
+  />
+  <label class="custom-file-label" for="object-type-icon">
+    <span class="d-block text-truncate">{{ fileName() }}</span>
+  </label>
+</div>

@@ -1,0 +1,31 @@
+<app-dialog
+  title="Add Responsibility"
+  titleId="responsibility-dialog-title"
+  size="standard"
+  (dismissed)="closed.emit()"
+>
+  <div class="form-container">
+    <div class="form-group">
+      <label for="responsibility-user">User name or Group name</label>
+      <app-searchable-select
+        controlId="responsibility-user"
+        label="User name or Group name"
+        formControlName="userOrGroupName"
+        [options]="usersAndGroups"
+        [showPlaceholder]="false"
+      />
+    </div>
+    <div class="form-group">
+      <label for="responsibility">Responsibility</label>
+      <select id="responsibility" class="form-control" formControlName="responsibility">
+        <option>View</option>
+        <option>Edit</option>
+        <option>Remove</option>
+      </select>
+    </div>
+  </div>
+  <div dialog-actions class="d-flex responsibility-actions">
+    <button appButton="submit" type="button" (click)="closed.emit()">Add</button>
+    <button appButton="cancel" type="button" (click)="closed.emit()">Cancel</button>
+  </div>
+</app-dialog>
