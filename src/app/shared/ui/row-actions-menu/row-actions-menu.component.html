@@ -16,17 +16,19 @@
     role="menu"
     [style.top.rem]="current.top"
     [style.left.rem]="current.left"
-    (keydown.arrowdown)="$event.preventDefault()"
-    (keydown.arrowup)="$event.preventDefault()"
+    (keydown.arrowdown)="moveFocus($event, 1)"
+    (keydown.arrowup)="moveFocus($event, -1)"
   >
-    <button
-      #removeButton
-      class="dropdown-item text-danger"
-      type="button"
-      role="menuitem"
-      (click)="remove()"
-    >
-      Remove
-    </button>
+    @for (item of menuItems(); track item.id) {
+      <button
+        class="dropdown-item"
+        [class.text-danger]="item.danger"
+        type="button"
+        role="menuitem"
+        (click)="select(item)"
+      >
+        {{ item.label }}
+      </button>
+    }
   </div>
 }

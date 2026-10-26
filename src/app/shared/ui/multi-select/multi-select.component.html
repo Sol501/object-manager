@@ -1,0 +1,42 @@
+<div class="multi-select form-control" [class.disabled]="disabled()" (keydown)="onKeydown($event)">
+  @for (option of selected(); track option.id) {
+    <span class="selected-option">
+      <button
+        type="button"
+        [title]="`Remove ${option.label}`"
+        [disabled]="disabled()"
+        (click)="toggle(option.id)"
+      >
+        x
+      </button>
+      {{ option.label }}
+    </span>
+  }
+  <input
+    type="text"
+    [id]="controlId()"
+    [disabled]="disabled()"
+    [value]="query()"
+    autocomplete="off"
+    (focus)="opened.set(true)"
+    (click)="opened.set(true)"
+    (input)="query.set($any($event.target).value); opened.set(true)"
+  />
+  @if (opened()) {
+    <div class="option-list">
+      @for (option of filtered(); track option.id) {
+        <button
+          type="button"
+          class="option"
+          [class.selected]="value().includes(option.id)"
+          [disabled]="disabled()"
+          (click)="toggle(option.id)"
+        >
+          {{ option.label }}
+        </button>
+      } @empty {
+        <span class="no-results">No results found</span>
+      }
+    </div>
+  }
+</div>

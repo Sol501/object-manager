@@ -24,6 +24,9 @@ export class DialogComponent implements OnDestroy {
   private _previousFocus: HTMLElement | null = null;
   readonly title = input.required<string>();
   readonly titleId = input.required<string>();
+  readonly panel = input<'modal' | 'side' | 'side-small'>('modal');
+  readonly size = input<'standard' | 'medium' | 'large'>('large');
+  readonly showHeader = input(true);
   readonly dismissed = output<void>();
 
   constructor() {

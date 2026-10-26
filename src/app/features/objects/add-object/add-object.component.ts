@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 import { AuthFacade } from '../../../core/auth/auth.facade.service';
 import { AppHeaderComponent } from '../../../shared/ui/app-header/app-header.component';
 import { ButtonDirective } from '../../../shared/ui/button/button.directive';
+import { StepperComponent } from '../../../shared/ui/stepper/stepper.component';
 import { AddObjectFormComponent } from './_subs/components/add-object-form/add-object-form.component';
 import { OBJECT_FORM_STEPS } from './_subs/components/add-object-form/add-object-form.model';
 import { AddObjectFacade } from './_subs/services/add-object.facade.service';
@@ -17,7 +18,7 @@ import { AddObjectFacade } from './_subs/services/add-object.facade.service';
 @Component( {
   selector: 'app-add-object',
   standalone: true,
-  imports: [RouterLink, AppHeaderComponent, ButtonDirective, AddObjectFormComponent],
+  imports: [RouterLink, AppHeaderComponent, ButtonDirective, StepperComponent, AddObjectFormComponent],
   providers: [AddObjectFacade],
   host: { class: 'd-block' },
   styleUrl: './add-object.component.scss',

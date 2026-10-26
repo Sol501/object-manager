@@ -16,41 +16,13 @@
         </ol>
      </nav>
 
-      <ol
-        class="object-stepper d-flex"
-        aria-label="Object creation steps"
-      >
-         @for (step of steps; track step.key; let number = $index) {
-          <li
-            class="step-item"
-            [class]="number  <= activeStep() ? 'active' : ''"
-          >
-            <span
-              class="step-connector"
-              [class]="number <= activeStep() ? 'active' : ''"
-              aria-hidden="true"
-            ></span>
-            <button
-              class="step-button"
-              type="button"
-              [attr.aria-current]= "number === activeStep() ? 'step' : null"
-	            [attr.aria-controls]="`object-step-${step.key}`"
-              [disabled]="!objectForm()?.canNavigateTo(number)"
-              (click)="objectForm()?.goToStep(number)"
-            >
-              <span
-                class= "step-number"
-                [class]="number <= activeStep() ? 'active' : ''"
-                aria-hidden ="true"
-                >{{ number + 1 }}</span
-              >
-             <span class="step-label">{{
-                step.label
-              }}</span>
-            </button>
-          </li>
-        }
-      </ol>
+      <app-stepper
+        [steps]="steps"
+        [activeStep]="activeStep()"
+        [availableThrough]="(objectForm()?.furthestStep() ?? -1) + 1"
+        [disabled]="facade.saving() || !objectForm()"
+        (stepSelected)="objectForm()?.goToStep($event)"
+      />
 
       @if (facade.loading()) {
         <p

@@ -1,0 +1,16 @@
+<ol class="object-stepper d-flex">
+  @for (step of steps(); track step.key; let number = $index) {
+    <li class="step-item" [class.active]="number <= activeStep()">
+      <span class="step-connector" [class.active]="number <= activeStep()"></span>
+      <button
+        class="step-button"
+        type="button"
+        [disabled]="disabled() || number > availableThrough()"
+        (click)="stepSelected.emit(number)"
+      >
+        <span class="step-number" [class.active]="number <= activeStep()">{{ number + 1 }}</span>
+        <span class="step-label">{{ step.label }}</span>
+      </button>
+    </li>
+  }
+</ol>

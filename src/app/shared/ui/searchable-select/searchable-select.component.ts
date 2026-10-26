@@ -49,6 +49,7 @@ export class SearchableSelectComponent implements ControlValueAccessor {
   readonly label = input.required<string>();
   readonly options = input.required<readonly SelectOption[]>();
   readonly placeholder = input('Select');
+  readonly showPlaceholder = input(true);
   readonly invalid = input(false);
   readonly describedBy = input<string | null>(null);
   readonly value = signal('');
@@ -63,7 +64,9 @@ export class SearchableSelectComponent implements ControlValueAccessor {
     const query = this.query().trim().toLocaleLowerCase();
     return query
       ? this.options().filter((option) => option.label.toLocaleLowerCase().includes(query))
-      : [{ id: '', label: this.placeholder() }, ...this.options()];
+      : this.showPlaceholder()
+        ? [{ id: '', label: this.placeholder() }, ...this.options()]
+        : this.options();
   });
 
   writeValue(value: string | null): void {

@@ -1,20 +1,20 @@
 <dialog
   #dialog
   class="modal-content app-dialog"
+  [class.side-panel]="panel() !== 'modal'"
+  [class.small-panel]="panel() === 'side-small'"
+  [class.standard-modal]="panel() === 'modal' && size() === 'standard'"
+  [class.medium-modal]="panel() === 'modal' && size() === 'medium'"
   (cancel)="$event.preventDefault(); dismissed.emit()"
   (keydown)="onKeydown($event)"
 >
-  <header class="modal-header align-items-center flex-wrap">
-    <h2 class="modal-title mr-auto" [id]="titleId()">{{ title() }}</h2>
-    <ng-content select="[dialog-tools]" />
-    <button
-      class="close"
-      type="button"
-      (click)="dismissed.emit()"
-    >
-      x
-    </button>
-  </header>
+  @if (showHeader()) {
+    <header class="modal-header align-items-center flex-wrap">
+      <h2 class="modal-title mr-auto" [id]="titleId()">{{ title() }}</h2>
+      <ng-content select="[dialog-tools]" />
+      <button class="close" type="button" (click)="dismissed.emit()">x</button>
+    </header>
+  }
   <div class="modal-body"><ng-content /></div>
   <footer class="modal-footer">
     <ng-content select="[dialog-actions]" />

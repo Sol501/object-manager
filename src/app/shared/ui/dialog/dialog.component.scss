@@ -66,3 +66,50 @@
     max-width: 71.25rem;
   }
 }
+
+.app-dialog.side-panel {
+  inset: 0 0 0 auto;
+  display: flex;
+  width: min(100%, 35rem);
+  max-width: 35rem;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  border-radius: 0;
+  overflow: hidden;
+}
+.app-dialog.side-panel:not([open]) {
+  display: none;
+}
+.side-panel .modal-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 0;
+}
+.side-panel .modal-footer {
+  padding: 0.5rem;
+}
+.app-dialog.small-panel {
+  width: min(100%, 18.75rem);
+}
+
+.app-dialog.standard-modal {
+  max-width: 31.25rem;
+  overflow: visible;
+}
+.standard-modal .modal-header,
+.medium-modal .modal-header {
+  padding: 1rem;
+}
+
+@media (min-width: 62rem) {
+  .app-dialog.medium-modal {
+    max-width: 50rem;
+  }
+}
+
+@media (max-height: 26rem) {
+  .app-dialog.standard-modal {
+    overflow-y: auto;
+  }
+}

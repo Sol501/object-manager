@@ -1,0 +1,78 @@
+.multi-select {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 1.875rem;
+  height: auto;
+  padding: 0.1875rem 0.375rem;
+}
+.multi-select input {
+  min-width: 3rem;
+  width: 3rem;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+}
+.multi-select:focus-within {
+  box-shadow: 0 0 0 0.1875rem rgb(47 111 159 / 25%);
+}
+.selected-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 0.25rem;
+  padding: 0 0.3125rem;
+  background: #e4e4e4;
+  border: 1px solid #aaa;
+  font-size: 0.75rem;
+}
+.selected-option button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #666;
+}
+.option-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  max-height: 12rem;
+  overflow: auto;
+  padding: 0.25rem 0;
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  background: white;
+  box-shadow: var(--shadow-card);
+}
+.option {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0.375rem 0.75rem;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  font-size: 0.875rem;
+}
+.option.selected {
+  background: #e4e4e4;
+}
+.option:hover,
+.option:focus {
+  background: #4b88bc;
+  color: white;
+}
+.no-results {
+  display: block;
+  padding: 0.375rem 0.75rem;
+}
+.disabled {
+  background: #e9ecef;
+}
