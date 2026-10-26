@@ -3,6 +3,7 @@ import { inject } from '@angular/core';
 import { map, timer } from 'rxjs';
 import { API_BASE_URL, MOCK_API_ENABLED } from '../config/api.config';
 import { MockObjectsService } from './mock-objects.service';
+import { MockObjectTypesService } from './mock-object-types.service';
 import { OBJECT_INFO_OPTIONS } from './object-lookups';
 import { MOCK_SUBORDINATES } from './subordinates';
 import { MOCK_KPIS } from './kpis';
@@ -24,6 +25,7 @@ export const mockApiInterceptor: HttpInterceptorFn = (request, next) => {
   }
 
   const objects = inject(MockObjectsService);
+  const objectTypes = inject(MockObjectTypesService);
   return timer(250).pipe(
     map(() => {
       if (path === 'subordinates.php' && request.method === 'POST') {
@@ -41,6 +43,9 @@ export const mockApiInterceptor: HttpInterceptorFn = (request, next) => {
       }
       if (path === 'object-lookups.php' && request.method === 'GET') {
         return new HttpResponse({ body: OBJECT_INFO_OPTIONS });
+      }
+      if (path === 'object-types.php' && request.method === 'POST') {
+        return new HttpResponse({ status: 201, body: objectTypes.save(request.body) });
       }
       if (path === 'objects.php' && request.method === 'POST') {
         return new HttpResponse({ status: 201, body: objects.save(request.body) });
