@@ -1,0 +1,21 @@
+<app-dialog title="Link with KPI's" titleId= "kpi-picker-title" (dismissed)="cancelled.emit()">
+  <app-table-search
+    dialog-tools
+    label="Search KPIs"
+    [autofocus]= "true"
+    [value]="query()"
+    (changed)="query.set($event)"
+  />
+  <app-kpi-options-table
+    [rows]= "filteredItems()"
+    [selectedIds]="selection()"
+   (toggled)="toggle($event)"
+  />
+  <span class="sr-only" role="status"
+    >{{ filteredItems().length }} KPIs found. {{ selection().size }} selected.</span
+  >
+  <ng-container  dialog-actions>
+    <button appButton="submit" type="button" (click)="confirm()">Add</button>
+    <button appButton="cancel" type="button" (click)="cancelled.emit()">Cancel</button>
+  </ng-container>
+</app-dialog>

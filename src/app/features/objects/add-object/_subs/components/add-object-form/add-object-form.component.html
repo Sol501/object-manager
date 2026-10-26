@@ -1,0 +1,45 @@
+<form
+  id="add-object-form"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+   novalidate
+>
+  <fieldset
+    id="object-step-objectInfo"
+    formGroupName="objectInfo"
+    [disabled]="busy()"
+    [hidden]="activeStep() !== 0"
+  >
+    <app-object-info [options]="options()" />
+  </fieldset>
+  <fieldset
+    id="object-step-subordinates"
+    formGroupName="subordinates"
+    [disabled]="busy()"
+    [hidden]="activeStep() !== 1"
+  >
+    @if (furthestStep() >= 1) {
+      <app-subordinates [active]="activeStep() === 1" [busy]="busy()" />
+    }
+  </fieldset>
+  <fieldset
+    id= "object-step-linkedKpis"
+    formGroupName="linkedKpis"
+    [disabled]="busy()"
+    [hidden]="activeStep() !== 2"
+  >
+    @if (furthestStep() >= 2) {
+      <app-linked-kpis [active]="activeStep() === 2" [busy]="busy()" />
+    }
+  </fieldset>
+  <fieldset
+    id= "object-step-actions"
+    formGroupName ="actions"
+    [disabled]="busy()"
+    [hidden]="activeStep() !== 3"
+  >
+    @if (furthestStep() >= 3) {
+      <app-actions-step [active]="activeStep() === 3" [busy]= "busy()" />
+    }
+  </fieldset>
+</form>

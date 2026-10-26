@@ -1,0 +1,61 @@
+<div class="name-label d-flex flex-wrap align-items-center justify-content-between">
+  <label class="mb-0" for="object-name"
+    >Object name <span class="required-mark">*</span></label
+  >
+  <div class="d-flex" role ="group">
+    <button
+      class="btn lang-btn"
+      type="button"
+      [class]="arabicVisible() ? 'btn-success' : ''"
+      (click)="toggleArabic()"
+    >
+      ع
+    </button>
+    <button
+      class="btn lang-btn"
+      type="button"
+      [class]="chineseVisible() ? 'btn-success' : ''"
+      (click)="toggleChinese()"
+    >
+      制
+    </button>
+  </div>
+</div>
+<input
+  class  ="form-control"
+  id="object-name"
+  type  ="text"
+  formControlName="name"
+  required
+	[class]="(group.controls.name.touched && group.controls.name.invalid) ? 'is-invalid' : ''"
+/>
+@if (group.controls.name.touched && group.controls.name.invalid) {
+  <p class="field-error" id="object-name-error">Enter an object name</p>
+}
+
+<div class="mt-3" id="object-name-ar-field" [hidden]="!arabicVisible()">
+  <label class="d-block mb-2" for="object-name-ar"
+    >Object name (Arabic)</label
+  >
+  <input
+    class="form-control"
+    id="object-name-ar"
+    type="text"
+    formControlName="nameAr"
+    lang  ="ar"
+    dir ="rtl"
+  />
+</div>
+
+<div class="mt-3" id="object-name-zh-field" [hidden]="!chineseVisible()">
+  <label class="d-block mb-2" for="object-name-zh"
+    >Object name (Chinese)</label
+  >
+  <input
+    class="form-control"
+    id  ="object-name-zh"
+    type="text"
+    formControlName="nameZh"
+    lang="zh"
+  />
+</div>

@@ -1,0 +1,25 @@
+<app-dialog
+  title="Link with other objects"
+ titleId="subordinate-picker-title"
+ (dismissed)="cancelled.emit()"
+>
+  <app-table-search
+    dialog-tools
+    label= "Search objects"
+    [autofocus]="true"
+    [value]="query()"
+    (changed)="query.set($event)"
+  />
+  <app-subordinate-options-table
+    [rows]="filteredItems()"
+    [selectedIds]="selection()"
+    (toggled)="toggle($event)"
+  />
+  <span class="sr-only" role="status"
+    >{{ filteredItems().length }} objects found. {{ selection().size }} selected.</span
+  >
+  <ng-container dialog-actions>
+    <button appButton="submit" type="button" (click)= "confirm()">Add</button>
+    <button appButton="cancel" type="button" (click)="cancelled.emit()">Cancel</button>
+  </ng-container>
+</app-dialog>

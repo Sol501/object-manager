@@ -1,0 +1,53 @@
+<app-dialog title="Actions" titleId="action-picker-title" (dismissed)="cancelled.emit()">
+  <app-table-search
+     dialog-tools
+    label="Search actions"
+    [autofocus]  ="true"
+    [value]="query()"
+    (changed)="query.set($event)"
+  />
+  <div class="table-main picker-table">
+    <table appTable class ="linked-table-content">
+      <colgroup>
+        <col class="action-select-column" />
+        <col class="action-id-column" />
+        <col class="action-picker-name-column" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th scope="col">Select</th>
+          <th scope="col">ID</th>
+          <th scope="col" class= "text-left">Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of filteredItems(); track row.id) {
+          <tr>
+            <td>
+              <app-toggle-switch
+                [label]="`Select ${row.name}`"
+                [checked]="selection().has(row.id)"
+                (changed)="toggle(row.id)"
+              />
+            </td>
+            <td>{{ row.id }}</td>
+            <td class="text-left">
+              <span class="table-row-title">{{ row.name }}</span>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="3">No actions match your search.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <span class="sr-only" role="status"
+    >{{ filteredItems().length }} actions found. {{ selection().size }} selected.</span
+  >
+  <ng-container dialog-actions>
+    <button appButton="submit" type="button" (click)="confirm()">Add</button>
+    <button appButton="cancel" type="button" (click)="cancelled.emit()">Cancel</button>
+  </ng-container>
+</app-dialog>

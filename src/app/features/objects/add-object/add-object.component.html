@@ -1,0 +1,152 @@
+<div class="app-page">
+  <app-header (logout)="logout()" />
+
+  <div class="app-container object-page">
+    <main class="object-content">
+      <nav
+	      class="mb-3"
+        aria-label="Breadcrumb"
+      >
+         <ol class="breadcrumb mb-0">
+          <li><a class="font-weight-bold" routerLink="/objects">My Views</a></li>
+          <li aria-hidden="true">/</li>
+          <li><a class= "font-weight-bold" routerLink="/objects">Objects List</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="table-row-title" aria-current="page">Add New Object</li>
+        </ol>
+     </nav>
+
+      <ol
+        class="object-stepper d-flex"
+        aria-label="Object creation steps"
+      >
+         @for (step of steps; track step.key; let number = $index) {
+          <li
+            class="step-item"
+            [class]="number  <= activeStep() ? 'active' : ''"
+          >
+            <span
+              class="step-connector"
+              [class]="number <= activeStep() ? 'active' : ''"
+              aria-hidden="true"
+            ></span>
+            <button
+              class="step-button"
+              type="button"
+              [attr.aria-current]= "number === activeStep() ? 'step' : null"
+	            [attr.aria-controls]="`object-step-${step.key}`"
+              [disabled]="!objectForm()?.canNavigateTo(number)"
+              (click)="objectForm()?.goToStep(number)"
+            >
+              <span
+                class= "step-number"
+                [class]="number <= activeStep() ? 'active' : ''"
+                aria-hidden ="true"
+                >{{ number + 1 }}</span
+              >
+             <span class="step-label">{{
+                step.label
+              }}</span>
+            </button>
+          </li>
+        }
+      </ol>
+
+      @if (facade.loading()) {
+        <p
+          class ="card loading-message"
+          role="status"
+        >
+          Loading object info...
+        </p>
+      }
+      
+
+      @if (facade.options(); as options) {
+        <div  class="object-form-panel">
+          <app-add-object-form
+            [options]="options"
+            [busy]="facade.saving()"
+            (submitted) ="facade.save($event, 'submitted')"
+            (draftRequested)= "facade.save($event, 'draft')"
+            (edited)="facade.clearResult()"
+          />
+          <footer class="object-actions d-flex flex-wrap justify-content-end">
+            @if (activeStep() > 0) {
+              <button
+             appButton="previous"
+                class="mr-auto"
+                type="button"
+                [disabled]="facade.saving()"
+                (click)="objectForm()?.previous()"
+              >
+                <img class="step-arrow" src="assets/images/left-arrow.svg" alt="" />Previous
+              </button>
+            }
+            <a appButton="cancel" routerLink="/objects"
+              ><img class="button-icon" src="assets/images/rejected.svg" alt="" />Cancel</a
+            >
+            @if (activeStep() === steps.length - 1) {
+              <button
+                appButton="draft"
+                type="button"
+                [disabled]="facade.saving()"
+                (click)="objectForm()?.saveDraft()"
+              >
+                <img class="button-icon" src="assets/images/save-icon.svg" alt="" />Draft
+              </button>
+              <button
+                appButton="submit"
+                type="submit"
+                form="add-object-form"
+                [disabled]="facade.saving()"
+              >
+                <img class="button-icon" src="assets/images/submit.svg" alt="" />Submit
+              </button>
+            } @else {
+              <button
+                appButton="next"
+                type= "button"
+                [disabled]  ="facade.saving()"
+                (click)="objectForm()?.next()"
+              >
+          Next<img class="step-arrow" src ="assets/images/right-arrow.svg" alt="" />
+              </button>
+            }
+          </footer>
+        </div>
+      }
+
+      @if (facade.saving()) {
+        <p class="save-status text-muted mt-3" role="status">Saving object...</p>
+      }
+      @if (facade.error(); as error) {
+        <div
+          class="alert alert-danger mt-3"
+          role="alert"
+        >
+          <p>{{ error }}</p>
+          @if (!facade.options()) {
+            <button
+              appButton="secondary"
+              class= "mt-3"
+              type="button"
+              [disabled]="facade.loading()"
+              (click)="facade.loadOptions()"
+            >
+              Retry
+            </button>
+          }
+        </div>
+      }
+      @if (facade.saved(); as saved) {
+        <p
+          class="alert alert-success mt-3"
+          role="status"
+        >
+          {{ saved.status === 'draft' ? 'Draft saved.' : 'Object submitted.' }}
+        </p>
+      }
+    </main>
+  </div>
+</div>

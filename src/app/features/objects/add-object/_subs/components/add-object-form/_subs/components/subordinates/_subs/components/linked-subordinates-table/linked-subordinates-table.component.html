@@ -1,0 +1,39 @@
+<div class="table-main linked-table">
+  <table appTable class="linked-table-content">
+    <colgroup>
+      <col class="column-status" />
+      <col class="column-details" />
+      <col class="column-details" />
+      <col  class="column-status" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th  scope="col">ID</th>
+        <th scope="col" class="text-left">Name</th>
+        <th scope= "col" class="text-left">Responsable</th>
+        <th scope="col">Subordinates</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows(); track row.id) {
+        <tr>
+          <td>{{ row.id }}</td>
+          <td class="text-left">
+            <span class="table-row-title">{{ row.name }}</span>
+          </td>
+          <td class="text-left"><app-object-type-label [type]="row.type" /></td>
+          <td>
+            <span
+              class="badge default-badge"
+              >{{ row.subordinateCount }}</span
+            >
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="4">No objects linked. Use the add button to select objects.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

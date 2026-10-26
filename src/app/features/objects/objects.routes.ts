@@ -8,4 +8,10 @@ export const objectsRoutes: Routes = [
     component: ObjectsComponent,
     title: 'Objects',
   },
+  {
+    path: 'add',
+    loadComponent: () =>
+      import('./add-object/add-object.component').then((module) => module.AddObjectComponent),
+    title: 'Add Object',
+  },
 ];

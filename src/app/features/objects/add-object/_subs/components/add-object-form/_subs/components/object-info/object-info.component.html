@@ -1,0 +1,81 @@
+<section  class="card object-info-card p-2">
+  <h2 class="card-title object-info-title" id="object-info-heading">
+    Object info
+  </h2>
+
+  <div
+    class="form-container"
+  >
+    <div>
+      <label class="d-block mb-2" for="object-type"
+        >Select Object Type <span class="required-mark">*</span></label
+      >
+      <app-searchable-select
+        controlId="object-type"
+        label="Select Object Type"
+        formControlName= "objectTypeId"
+        placeholder="Select object type"
+        [options]="options().objectTypes"
+        [invalid]="group.controls.objectTypeId.touched && group.controls.objectTypeId.invalid"
+        [describedBy]  ="
+          group.controls.objectTypeId.touched && group.controls.objectTypeId.invalid
+            ? 'object-type-error'
+            : null
+        "
+      />
+      @if (group.controls.objectTypeId.touched && group.controls.objectTypeId.invalid) {
+        <p class="field-error" id="object-type-error">Select an object type</p>
+      }
+    </div>
+
+    <div>
+      <label class="d-block mb-2" for="object-code"
+        >Object code <span class="required-mark">*</span></label
+      >
+      <input
+        class= "form-control"
+        id="object-code"
+        type= "text"
+        formControlName="code"
+        required
+        [class]="(group.controls.code.touched && group.controls.code.invalid) ? 'is-invalid' : ''"
+      />
+      @if (group.controls.code.touched && group.controls.code.invalid) {
+        <p class="field-error" id="object-code-error">Enter an object code</p>
+      }
+    </div>
+
+    <app-object-name-fields />
+
+    <div>
+      <label class="d-block mb-2" for="responsible-person"
+        >Person responsible</label
+      >
+      <app-searchable-select
+        controlId= "responsible-person"
+        label="Person responsible"
+        formControlName="responsiblePersonId"
+         placeholder="Select person"
+        [options]="options().people"
+      />
+    </div>
+
+    <div>
+      <label class="d-block mb-2" for= "responsibility">Responsibility</label>
+      <select
+        class= "form-control"
+        id="responsibility"
+        formControlName="responsibilityId"
+      >
+        <option  value="">Select responsibility</option>
+        @for (option of options().responsibilities; track option.id) {
+          <option  [value]="option.id">{{ option.label }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="d-flex align-items-start">
+      <app-bypass-toggle formControlName="bypass" />
+    </div>
+  </div>
+</section>

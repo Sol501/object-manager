@@ -1,0 +1,52 @@
+<div class="table-main picker-table">
+  <table appTable class="picker-table-content">
+    <colgroup>
+      <col class= "column-select" />
+      <col  class="column-select" />
+      <col class="column-name" />
+      <col class="column-status" />
+      <col class="column-type" />
+      <col class="column-status" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th scope="col">Select</th>
+        <th scope="col">ID</th>
+        <th  scope="col" class="text-left">Name</th>
+        <th scope="col">Aggregated</th>
+        <th scope="col" class="text-left">KPI Source</th>
+        <th scope="col">State</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows(); track row.id) {
+        <tr>
+          <td>
+            <app-toggle-switch
+              [label]="`Select ${row.name}`"
+              [checked]="selectedIds().has(row.id)"
+              (changed)="toggled.emit(row.id)"
+            />
+          </td>
+          <td>{{ row.id }}</td>
+          <td class="text-left">
+            <span class="table-row-title">{{ row.name }}</span>
+          </td>
+          <td>
+            <img
+              class="active-status-img"
+              [src]="row.aggregated ? 'assets/images/active.svg' : 'assets/images/inactive.svg'"
+              [alt]="row.aggregated ? 'Aggregated' : 'Not aggregated'"
+            />
+          </td>
+          <td class="text-left">{{ row.source }}</td>
+          <td>{{ row.state }}</td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="6">No KPIs match your search.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
